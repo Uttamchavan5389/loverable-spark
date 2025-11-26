@@ -1,12 +1,27 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Navbar } from "@/components/Navbar";
+import { Hero } from "@/components/Hero";
+import { BrandSlider } from "@/components/BrandSlider";
+import { ServicesPreview } from "@/components/ServicesPreview";
+import { WhyChooseUs } from "@/components/WhyChooseUs";
+import { ContactForm } from "@/components/ContactForm";
+import { Footer } from "@/components/Footer";
+import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <WhatsAppFloat />
+      
+      <main className="flex-1">
+        <Hero />
+        <BrandSlider />
+        <ServicesPreview />
+        <WhyChooseUs />
+        <ContactForm />
+      </main>
+
+      <Footer />
     </div>
   );
 };
