@@ -38,14 +38,8 @@ export const Navbar = () => {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
-          <Button variant="outline" size="sm" asChild>
-            <a href="tel:+919999999999">
-              <Phone className="h-4 w-4 mr-2" />
-              Call Now
-            </a>
-          </Button>
           <Button size="sm" asChild className="hero-gradient">
-            <a href="#contact">Book Service</a>
+            <a href="#contact">Track Booking</a>
           </Button>
         </div>
 
@@ -75,14 +69,8 @@ export const Navbar = () => {
                 Contact
               </a>
               <div className="flex flex-col gap-2 pt-2">
-                <Button variant="outline" size="sm" asChild>
-                  <a href="tel:+919999999999">
-                    <Phone className="h-4 w-4 mr-2" />
-                    Call Now
-                  </a>
-                </Button>
                 <Button size="sm" asChild className="hero-gradient">
-                  <a href="#contact">Book Service</a>
+                  <a href="#contact">Track Booking</a>
                 </Button>
               </div>
             </div>
