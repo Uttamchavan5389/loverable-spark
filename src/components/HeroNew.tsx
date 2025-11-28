@@ -1,69 +1,147 @@
+import { useMemo, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Phone } from "lucide-react";
+import { Phone, Wrench, Shield, Clock, Star, MessageCircle } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import heroFallback1 from "@/assets/hero/hero-mechanic.jpg";
+import heroFallback2 from "@/assets/hero/hero-slide-2.jpg";
+import heroFallback3 from "@/assets/hero/hero-slide-3.jpg";
+import heroFallback4 from "@/assets/hero/hero-slide-4.jpg";
+import heroFallback5 from "@/assets/hero/hero-slide-5.jpg";
 
 export const HeroNew = () => {
-  return (
-    <section className="relative min-h-[600px] overflow-hidden bg-gradient-to-br from-[#007bff] via-[#00c6ff] to-[#007bff] text-white" style={{
-      backgroundImage: 'url("https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1920")',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundBlendMode: 'overlay',
-    }}>
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#007bff]/95 via-[#00c6ff]/90 to-[#007bff]/95" />
-      
-      {/* Floating emoji decorations */}
-      <div className="absolute top-20 left-10 text-6xl opacity-10 animate-float">🏍️</div>
-      <div className="absolute bottom-20 right-10 text-6xl opacity-10 animate-float" style={{ animationDelay: "1s" }}>⚙️</div>
+  const plugin = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: false })
+  );
 
-      <div className="container relative z-10 mx-auto px-4 py-20 md:py-32">
-        <div className="mx-auto max-w-4xl text-center">
-          <h1 className="mb-6 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
-            ONLINE <span className="text-orange-400">PROFESSIONAL BIKE SERVICE</span> & REPAIRS IN HYDERABAD
+  const heroSlides = useMemo(() => {
+    const modules = import.meta.glob<{ default: string }>(
+      "@/assets/hero/*.{jpg,png,jpeg,webp}",
+      { eager: true }
+    );
+
+    const images = Object.values(modules).map((mod) => mod.default);
+
+    if (images.length === 0) {
+      return [
+        { image: heroFallback1, alt: "Professional bike mechanic at work" },
+        { image: heroFallback2, alt: "Expert motorcycle engine repair in Hyderabad" },
+        { image: heroFallback3, alt: "Multiple bikes being serviced in professional workshop" },
+        { image: heroFallback4, alt: "Satisfied customer receiving serviced Royal Enfield" },
+        { image: heroFallback5, alt: "Professional brake repair service in Hyderabad" },
+      ];
+    }
+
+    return images.map((image, index) => ({
+      image,
+      alt: `Hero slide ${index + 1}`,
+    }));
+  }, []);
+
+  return (
+    <section className="relative min-h-[680px] md:min-h-[600px] overflow-hidden text-white">
+      {/* Carousel with multiple images - changes every 3 seconds */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <Carousel
+          plugins={[plugin.current]}
+          className="w-full h-full"
+          opts={{
+            loop: true,
+            align: "start",
+          }}
+        >
+          <CarouselContent className="h-full -ml-0">
+            {heroSlides.map((slide, index) => (
+              <CarouselItem key={index} className="pl-0 basis-full min-h-[680px] md:min-h-[600px]">
+                <div className="relative w-full min-h-[680px] md:min-h-[600px]">
+                  <img 
+                    src={slide.image} 
+                    alt={slide.alt}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    style={{ display: 'block' }}
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </div>
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60 z-[1]"></div>
+      
+      {/* Content */}
+      <div className="container mx-auto px-4 py-20 md:py-16 relative z-10 min-h-[680px] md:min-h-[600px] flex items-center">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Trusted Badge */}
+          <Badge className="mb-4 bg-orange-500 text-white drop-shadow-lg px-4 py-2 text-sm font-semibold">
+            🏆 Trusted Since 1990
+          </Badge>
+
+          {/* Main Title */}
+          <h1 className="mb-4 text-4xl md:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-2xl">
+            <span className="text-white">Trusted Bike Service in </span>
+            <span className="text-blue-400">Hyderabad</span>
+            <span className="text-white"> 🛠️</span>
           </h1>
           
-          <p className="mb-8 text-lg md:text-xl">
-            Get professional two-wheeler servicing and repairs across Hyderabad.
+          {/* Subtitle */}
+          <p className="mb-8 text-lg md:text-xl text-gray-200 drop-shadow-xl">
+            Sree Ram Bike Mechanic — Your reliable partner for all two-wheeler repairs and maintenance ⚡
           </p>
 
-          {/* Badge Pills */}
-          <div className="mb-10 flex flex-wrap justify-center gap-3">
-            <Badge variant="secondary" className="bg-white/10 backdrop-blur-sm border-white/20 text-white px-4 py-2 text-sm">
-              🏍 Free Pick-up & Drop
-            </Badge>
-            <Badge variant="secondary" className="bg-white/10 backdrop-blur-sm border-white/20 text-white px-4 py-2 text-sm">
-              🛡 Service Warranty
-            </Badge>
-            <Badge variant="secondary" className="bg-white/10 backdrop-blur-sm border-white/20 text-white px-4 py-2 text-sm">
-              ⚙ Genuine Parts
-            </Badge>
-            <Badge variant="secondary" className="bg-white/10 backdrop-blur-sm border-white/20 text-white px-4 py-2 text-sm">
-              ⚡ Same-Day Delivery
-            </Badge>
+          {/* Feature Boxes */}
+          <div className="mb-10 flex flex-wrap justify-center gap-4">
+            <div className="bg-white/10 backdrop-blur-sm border border-gray-300/20 rounded-lg px-6 py-4 flex items-center gap-3">
+              <Wrench className="h-5 w-5 text-blue-400" />
+              <span className="text-white font-medium">40+ Years Experience</span>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm border border-gray-300/20 rounded-lg px-6 py-4 flex items-center gap-3">
+              <Shield className="h-5 w-5 text-blue-400" />
+              <span className="text-white font-medium">Genuine Parts</span>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm border border-gray-300/20 rounded-lg px-6 py-4 flex items-center gap-3">
+              <Clock className="h-5 w-5 text-blue-400" />
+              <span className="text-white font-medium">Quick Turnaround</span>
+            </div>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
             <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg" asChild>
               <a href="#contact">
-                📅 BOOK A BIKE SERVICE
+                <Phone className="mr-2 h-5 w-5" />
+                Book Service
               </a>
             </Button>
-            <Button size="lg" className="bg-green-500 hover:bg-green-600 text-white px-8 py-6 text-lg" asChild>
-              <a href="tel:+919999999999">
-                <Phone className="mr-2 h-5 w-5" />
-                CALL NOW
+            <Button size="lg" className="bg-[#25D366] hover:bg-[#20BA5A] text-white px-8 py-6 text-lg" asChild>
+              <a href="https://wa.me/919533819551?text=Hi%20I%20want%20to%20book%20a%20service" target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="mr-2 h-5 w-5" />
+                WhatsApp Us
               </a>
             </Button>
           </div>
-        </div>
-      </div>
 
-      {/* Carousel dots indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-        <div className="h-2 w-2 rounded-full bg-white"></div>
-        <div className="h-2 w-2 rounded-full bg-white/50"></div>
+          {/* Social Proof */}
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
+            <div className="flex items-center gap-2">
+              <div className="flex gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+              <span className="text-white">4.9/5 on Google</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-blue-400 font-bold">1000+</span>
+              <span className="text-white">Happy Customers</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-blue-400 font-semibold">Warranty</span>
+              <span className="text-gray-300">on Repairs</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

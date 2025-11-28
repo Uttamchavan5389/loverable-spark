@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "@/components/NavLink";
 
@@ -9,14 +9,14 @@ export const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <nav className="container mx-auto flex h-16 items-center justify-between px-4">
-        <NavLink to="/" className="flex items-center gap-2">
+        <NavLink to="/" className="flex items-center gap-2 group">
           <div className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-lg">
-              SR
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white group-hover:scale-110 transition-transform">
+              <Wrench className="h-6 w-6" />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-bold leading-none">Sree Ram</span>
-              <span className="text-xs text-muted-foreground">Bike Mechanic</span>
+              <span className="text-lg font-bold leading-tight text-foreground">Hyderabad</span>
+              <span className="text-lg font-bold leading-tight text-primary">BikeMechanic</span>
             </div>
           </div>
         </NavLink>
@@ -35,12 +35,6 @@ export const Navbar = () => {
           <a href="#contact" className="text-sm font-medium transition-colors hover:text-primary">
             Contact
           </a>
-        </div>
-
-        <div className="hidden md:flex items-center gap-3">
-          <Button size="sm" asChild className="hero-gradient">
-            <a href="#contact">Track Booking</a>
-          </Button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -68,11 +62,6 @@ export const Navbar = () => {
               <a href="#contact" className="text-sm font-medium" onClick={() => setIsOpen(false)}>
                 Contact
               </a>
-              <div className="flex flex-col gap-2 pt-2">
-                <Button size="sm" asChild className="hero-gradient">
-                  <a href="#contact">Track Booking</a>
-                </Button>
-              </div>
             </div>
           </div>
         )}

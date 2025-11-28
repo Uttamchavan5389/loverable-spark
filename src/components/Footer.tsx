@@ -45,7 +45,7 @@ export const Footer = () => {
             <ul className="space-y-2 text-sm text-gray-300">
               <li>📍 Macherlas, Hafelipur</li>
               <li>Hyderabad, Telangana 500078</li>
-              <li>📞 +91 89196 52618</li>
+              <li>📞 +91 95338 19551</li>
               <li>✉️ smartgarrage@gmail.com</li>
             </ul>
           </div>

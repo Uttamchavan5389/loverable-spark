@@ -41,7 +41,7 @@ export const Hero = () => {
                 <a href="tel:+919999999999">Call Now</a>
               </Button>
               <Button size="lg" className="bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp))]/90 text-white" asChild>
-                <a href="https://wa.me/918919652618?text=Hi%20I%20want%20to%20book%20a%20service" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/919533819551?text=Hi%20I%20want%20to%20book%20a%20service" target="_blank" rel="noopener noreferrer">
                   💬 WhatsApp
                 </a>
               </Button>
