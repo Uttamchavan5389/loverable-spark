@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
-import { Wrench, Zap, Settings, Droplet, Gauge, Shield, Battery, Sparkles } from "lucide-react";
+import { Wrench, Zap, Settings, Droplet, Gauge, Shield, Battery, Sparkles, AlertTriangle, FileText } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -149,6 +149,42 @@ const services = [
       "Wheel Deep Clean",
       "Underbody Wash",
       "Final Inspection",
+    ],
+  },
+  {
+    icon: AlertTriangle,
+    title: "Accidental Repair",
+    price: "Starting from ₹2,999",
+    description: "Complete accident damage repair including body work and part replacement",
+    features: [
+      "Complete Damage Assessment",
+      "Body Denting & Painting",
+      "Frame Alignment Check",
+      "Parts Replacement",
+      "Panel Beating Work",
+      "Paint Matching & Refinishing",
+      "Structural Repairs",
+      "Insurance Claim Support",
+      "Quality Assurance Check",
+      "Post-Repair Warranty",
+    ],
+  },
+  {
+    icon: FileText,
+    title: "Bike Insurance (Tie Up)",
+    price: "Best Rates Available",
+    description: "Hassle-free bike insurance solutions with multiple providers",
+    features: [
+      "Multiple Insurance Providers",
+      "Competitive Premium Rates",
+      "Comprehensive Coverage",
+      "Third-Party Insurance",
+      "Easy Documentation Process",
+      "Quick Policy Issuance",
+      "Claim Processing Support",
+      "Policy Renewal Assistance",
+      "Add-On Cover Options",
+      "Free Consultation",
     ],
   },
 ];
