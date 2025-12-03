@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
-import { Wrench, Zap, Settings, Droplet, Gauge, Shield, Battery, Sparkles, AlertTriangle, FileText } from "lucide-react";
+import { Wrench, Zap, Settings, Droplet, Gauge, Shield, Battery, Sparkles, AlertTriangle, FileText, PlugZap } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ServiceCard } from "@/components/ServiceCard";
 
 const services = [
   {
@@ -150,6 +151,24 @@ const services = [
       "Wheel Deep Clean",
       "Underbody Wash",
       "Final Inspection",
+    ],
+  },
+  {
+    icon: PlugZap,
+    title: "EV Bike Service",
+    price: "Starting from ₹1,499",
+    description: "Expert servicing for electric bikes (excluding battery repairs)",
+    features: [
+      "Complete EV Bike Health Check",
+      "Motor & Controller Diagnostics",
+      "Wiring & Connector Inspection",
+      "Regenerative Braking System Check",
+      "Throttle & Display Calibration",
+      "Charging Port & Cable Check",
+      "Brake & Suspension Tuning",
+      "Tyre & Wheel Alignment",
+      "Noise & Vibration Inspection",
+      "Final Road Test & Report",
     ],
   },
   {

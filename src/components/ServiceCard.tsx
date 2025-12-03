@@ -1,28 +1,40 @@
-import { Button } from "@/components/ui/button";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface ServiceCardProps {
   icon: LucideIcon;
   title: string;
   price: string;
   features: string[];
+  image?: string;
 }
 
-export const ServiceCard = ({ icon: Icon, title, price, features }: ServiceCardProps) => {
+export const ServiceCard = ({ icon: Icon, title, price, features, image }: ServiceCardProps) => {
   return (
-    <div className="group relative overflow-hidden rounded-2xl bg-white shadow-[0_12px_30px_rgba(15,23,42,0.08)] transition-all hover:-translate-y-2 hover:shadow-[0_18px_35px_rgba(15,23,42,0.12)] border-t-4 border-transparent hover:border-green-border">
+    <div 
+      className="w-[350px] overflow-hidden group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-2 rounded-2xl bg-white shadow-[0_12px_30px_rgba(15,23,42,0.08)] hover:shadow-[0_18px_35px_rgba(15,23,42,0.12)] border-t-4 border-transparent hover:border-green-border"
+    >
+      {image && (
+        <div className="h-48 overflow-hidden rounded-t-2xl">
+          <img 
+            src={image} 
+            alt={title}
+            className="w-full h-full object-cover rounded-t-2xl group-hover:scale-110 transition-transform duration-500"
+          />
+        </div>
+      )}
       <div className="p-4">
         {/* Icon */}
-        <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-blue-50 to-blue-100">
+        <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-blue-50 to-blue-100 transition-transform duration-300 group-hover:scale-110">
           <Icon className="h-6 w-6 text-primary" />
         </div>
 
-        {/* Title and Disclaimer */}
+        {/* Title and Price Badge */}
         <div className="mb-3 space-y-2">
           <h3 className="text-lg font-bold text-foreground">{title}</h3>
           <div className="space-y-2">
             <span className="block rounded-full border border-[#ef4444] bg-[#ef4444] px-3 py-1 text-[10px] font-semibold text-white uppercase tracking-wide">
-              Price varies – final quote after inspection
+              PRICE VARIES - FINAL QUOTE AFTER INSPECTION
             </span>
           </div>
         </div>
@@ -37,19 +49,16 @@ export const ServiceCard = ({ icon: Icon, title, price, features }: ServiceCardP
           ))}
         </ul>
 
-        {/* CTA Button */}
-        <Button
-          className="w-full h-12 bg-[#0066FF] text-white text-sm font-semibold rounded-xl transition-all duration-200 hover:-translate-y-[3px] hover:bg-[#0050cc] hover:shadow-[0_8px_20px_rgba(0,102,255,0.25)]"
-          asChild
-        >
-          <a
-            href="https://wa.me/919533819551?text=Hi%20I%20want%20to%20get%20a%20quote%20for%20bike%20service"
-            target="_blank"
-            rel="noopener noreferrer"
+        {/* Learn More Link - Centered */}
+        <div className="flex justify-center pb-[15px]">
+          <Link 
+            to="/services"
+            className="text-primary hover:text-primary/80 font-semibold flex items-center gap-1 transition-all"
           >
-            Get Quote on WhatsApp
-          </a>
-        </Button>
+            Learn More 
+            <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
       </div>
     </div>
   );
