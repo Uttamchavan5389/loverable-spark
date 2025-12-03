@@ -30,7 +30,7 @@ export const HeroNew = () => {
         { image: heroFallback3, alt: "Multiple bikes being serviced in professional workshop" },
         { image: heroFallback4, alt: "Satisfied customer receiving serviced Royal Enfield" },
         { image: heroFallback5, alt: "Professional brake repair service in Hyderabad" },
-      ];
+  ];
     }
 
     return images.map((image, index) => ({
@@ -40,7 +40,7 @@ export const HeroNew = () => {
   }, []);
 
   return (
-    <section className="relative min-h-[680px] md:min-h-[600px] overflow-hidden text-white">
+    <section id="home" className="relative hero-section-height overflow-hidden text-white">
       {/* Carousel with multiple images - changes every 3 seconds */}
       <div className="absolute inset-0 w-full h-full z-0">
         <Carousel
@@ -53,12 +53,12 @@ export const HeroNew = () => {
         >
           <CarouselContent className="h-full -ml-0">
             {heroSlides.map((slide, index) => (
-              <CarouselItem key={index} className="pl-0 basis-full min-h-[680px] md:min-h-[600px]">
-                <div className="relative w-full min-h-[680px] md:min-h-[600px]">
+              <CarouselItem key={index} className="pl-0 basis-full hero-section-height">
+                <div className="relative w-full hero-section-height">
                   <img 
                     src={slide.image} 
                     alt={slide.alt}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover hero-mobile-img"
                     style={{ display: 'block' }}
                   />
                 </div>
@@ -71,7 +71,7 @@ export const HeroNew = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60 z-[1]"></div>
       
       {/* Content */}
-      <div className="container mx-auto px-4 py-20 md:py-16 relative z-10 min-h-[680px] md:min-h-[600px] flex items-center">
+      <div className="container mx-auto px-4 py-20 md:py-16 relative z-10 hero-section-height flex items-center">
         <div className="max-w-4xl mx-auto text-center">
           {/* Trusted Badge */}
           <Badge className="mb-4 bg-orange-500 text-white drop-shadow-lg px-4 py-2 text-sm font-semibold">

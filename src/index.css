@@ -176,33 +176,47 @@ All colors MUST be HSL.
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: max-content;
-    gap: 0 0.25rem; /* Very tight gap for mobile */
+    gap: 0 0.85rem; /* Mobile gap */
     width: max-content;
     padding: 0;
     margin: 0;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 360px) {
     .grid-container {
-      gap: 0 0.75rem; /* Slightly increased for sm */
+      gap: 0 0.85rem; /* Normal Mobile (360-479px) - Standard touch start */
     }
   }
 
   @media (min-width: 768px) {
     .grid-container {
-      gap: 0 1.25rem; /* Medium gap for md */
+      gap: 0 1.25rem; /* Small Tablet Portrait (768-833px) - iPad Mini, Galaxy Tab A */
     }
   }
 
   @media (min-width: 1024px) {
     .grid-container {
-      gap: 0 1.5rem; /* Larger gap for lg */
+      gap: 0 1.5rem; /* Large Tablet Landscape (1024-1199px) - iPad Pro 11"/12.9" */
     }
   }
 
-  @media (min-width: 1280px) {
+  @media (min-width: 1200px) {
     .grid-container {
-      gap: 0 2rem; /* Full gap for xl */
+      gap: 0 1.75rem; /* Small Laptop/Notebook (1200-1399px) - 13" MacBook, 14" laptop */
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .grid-container {
+      gap: 0 2rem; /* Standard Desktop/Full HD (1400-1919px) - 15-22" monitors, iMac 21" */
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .grid-container {
+      gap: 0 2rem; /* Large Monitor/2K Display (1920px+) - 24-27" 2K monitors */
     }
   }
 
@@ -212,27 +226,33 @@ All colors MUST be HSL.
     gap: 0.25rem; /* Very tight gap for mobile */
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 360px) {
     .grid-column {
-      gap: 0.5rem; /* Slightly increased for sm */
+      gap: 0.5rem; /* Normal Mobile (360-479px) - Standard touch start */
     }
   }
 
   @media (min-width: 768px) {
     .grid-column {
-      gap: 1rem; /* Medium gap for md */
+      gap: 1rem; /* Small Tablet Portrait (768-833px) - iPad Mini, Galaxy Tab A */
     }
   }
 
   @media (min-width: 1024px) {
     .grid-column {
-      gap: 1.5rem; /* Larger gap for lg */
+      gap: 1.5rem; /* Large Tablet Landscape (1024-1199px) - iPad Pro 11"/12.9" */
     }
   }
 
-  @media (min-width: 1280px) {
+  @media (min-width: 1200px) {
     .grid-column {
-      gap: 2rem; /* Full gap for xl */
+      gap: 1.75rem; /* Small Laptop/Notebook (1200-1399px) - 13" MacBook, 14" laptop */
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .grid-column {
+      gap: 2rem; /* Standard Desktop/Full HD (1400-1919px) - 15-22" monitors, iMac 21" */
     }
   }
 
@@ -258,40 +278,153 @@ All colors MUST be HSL.
     align-self: flex-end;
   }
 
+  /* Row 2: All images align at top baseline (downward images extend down) */
+  .row-2 .grid-column {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .row-2 .grid-column > div {
+    align-self: flex-start;
+  }
+
   /* Floating Gallery Row Styles */
   .row {
     display: flex;
-    justify-content: center;
-    margin: 5px 0; /* Very tight margin for mobile */
+    justify-content: flex-start;
+    margin: 5px 0;
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 0;
     will-change: transform;
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 360px) {
     .row {
-      margin: 15px 0; /* Medium margin for sm */
+      margin: 15px 0; /* Normal Mobile (360-479px) - Standard touch start */
     }
   }
 
   @media (min-width: 768px) {
     .row {
-      margin: 25px 0; /* Larger margin for md */
+      margin: 25px 0; /* Small Tablet Portrait (768-833px) - iPad Mini, Galaxy Tab A */
     }
   }
 
   @media (min-width: 1024px) {
     .row {
-      margin: 35px 0; /* Full margin for lg */
+      margin: 35px 0; /* Large Tablet Landscape (1024-1199px) - iPad Pro 11"/12.9" */
     }
   }
 
-  @media (min-width: 1280px) {
+  @media (min-width: 1200px) {
     .row {
-      margin: 40px 0; /* Maximum margin for xl */
+      margin: 38px 0; /* Small Laptop/Notebook (1200-1399px) - 13" MacBook, 14" laptop */
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .row {
+      margin: 40px 0; /* Standard Desktop/Full HD (1400-1919px) - 15-22" monitors, iMac 21" */
     }
   }
 
   .row-1,
   .row-2 {
     transition: transform 0.1s ease-out;
+  }
+
+  /* Row 2: Force left edge alignment with no spacing */
+  .row-2 {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    left: 0 !important;
+  }
+
+  .row-2 .grid-container {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  /* Hero section responsive heights for all device sizes - Complete breakpoint coverage */
+  .hero-section-height {
+    min-height: 1000px; /* 1. Extra Small Mobile (0-319px) - Very old phones */
+  }
+
+  @media (min-width: 320px) {
+    .hero-section-height {
+      min-height: 980px; /* 2. Small Mobile (320-359px) - iPhone SE, iPhone 6-8 */
+    }
+  }
+
+  @media (min-width: 360px) {
+    .hero-section-height {
+      min-height: 1000px; /* 3. Normal Mobile (360-479px) - iPhone X-15, Galaxy S10-S23 ✅ Standard touch start */
+    }
+  }
+
+  @media (min-width: 480px) {
+    .hero-section-height {
+      min-height: 900px; /* 4. Large Mobile/Phablet (480-575px) - iPhone 15 Pro Max, Galaxy Note */
+    }
+  }
+
+  @media (min-width: 576px) {
+    .hero-section-height {
+      min-height: 850px; /* 5. Mobile Landscape (576-767px) - iPhones/Android in landscape */
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero-section-height {
+      min-height: 800px; /* 6. Small Tablet Portrait (768-833px) - iPad Mini, Galaxy Tab A */
+    }
+  }
+
+  @media (min-width: 834px) {
+    .hero-section-height {
+      min-height: 750px; /* 7. Tablet Portrait/Landscape (834-1023px) - iPad Air, iPad 10th Gen */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-section-height {
+      min-height: 700px; /* 8. Large Tablet Landscape (1024-1199px) - iPad Pro 11"/12.9" */
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .hero-section-height {
+      min-height: 650px; /* 9. Small Laptop/Notebook (1200-1399px) - 13" MacBook, 14" laptop */
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .hero-section-height {
+      min-height: 100vh; /* 10. Standard Desktop/Full HD (1400-1919px) - ensure full viewport height, no grey bar */
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .hero-section-height {
+      min-height: 100vh; /* 11. Large Monitor/2K Display (1920-2559px) - full viewport */
+    }
+  }
+
+  @media (min-width: 2560px) {
+    .hero-section-height {
+      min-height: 100vh; /* 12. Extra Large/4K & TVs (2560px+) - full viewport */
+    }
+  }
+
+  /* Hero image mobile positioning - show bottom of image on mobile and tablet */
+  .hero-mobile-img {
+    object-position: center bottom;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-mobile-img {
+      object-position: center center;
+    }
   }
 }

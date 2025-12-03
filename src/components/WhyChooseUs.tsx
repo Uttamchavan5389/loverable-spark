@@ -25,7 +25,7 @@ const reasons = [
 
 export const WhyChooseUs = () => {
   return (
-    <section id="why-choose-us" className="py-20 bg-muted/30">
+    <section id="why-choose-us" className="py-16 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">

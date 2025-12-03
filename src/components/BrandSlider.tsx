@@ -12,7 +12,7 @@ const scooterModules = import.meta.glob<{ default: string }>(
   { eager: true }
 );
 
-const SCROLL_SPEED = 1.4; // pixels per frame
+const SCROLL_SPEED = 1.3; // pixels per frame
 
 export const BrandSlider = () => {
   // Process brands: extract filename and sort

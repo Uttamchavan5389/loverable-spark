@@ -12,7 +12,7 @@ interface ServiceCardProps {
 export const ServiceCard = ({ icon: Icon, title, price, features, image }: ServiceCardProps) => {
   return (
     <div 
-      className="w-[350px] overflow-hidden group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-2 rounded-2xl bg-white shadow-[0_12px_30px_rgba(15,23,42,0.08)] hover:shadow-[0_18px_35px_rgba(15,23,42,0.12)] border-t-4 border-transparent hover:border-green-border"
+      className="w-full md:w-[330px] flex-shrink-0 overflow-hidden group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-2 rounded-2xl bg-white shadow-[0_12px_30px_rgba(15,23,42,0.08)] hover:shadow-[0_18px_35px_rgba(15,23,42,0.12)] border-t-4 border-transparent hover:border-green-border"
     >
       {image && (
         <div className="h-48 overflow-hidden rounded-t-2xl">

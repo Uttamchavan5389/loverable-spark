@@ -1,5 +1,4 @@
 import { useMemo, useRef, useEffect } from "react";
-import { Badge } from "@/components/ui/badge";
 import normalPlaceholder1 from "@/assets/gallery/normal/placeholder-1.png";
 import normalPlaceholder2 from "@/assets/gallery/normal/placeholder-2.png";
 import normalPlaceholder3 from "@/assets/gallery/normal/placeholder-3.png";
@@ -39,93 +38,147 @@ export const Gallery = () => {
       : [reversePlaceholder1, reversePlaceholder2, reversePlaceholder3, reversePlaceholder4, reversePlaceholder5, reversePlaceholder6];
   }, []);
 
-  // Take first 6 images for each row
-  const row1Images = normalImages.slice(0, 6);
-  const row2Images = reverseImages.slice(0, 6);
+  const row1Images = useMemo(() => [...normalImages, ...normalImages], [normalImages]);
+  // Row 2: Duplicate images for seamless right-to-left looping
+  const row2Images = useMemo(() => [...reverseImages, ...reverseImages], [reverseImages]);
 
-  // Helper function to determine if image should be up or down for Row 1
-  // Pattern: 1 up, 2 down, 3 up, 4 down, 5 up, 6 down
-  // Odd positions (1, 3, 5) are up, even positions (2, 4, 6) are down
   const getAlignmentRow1 = (index: number) => {
-    // index is 0-based: 0, 1, 2, 3, 4, 5
-    // Position 1 (index 0): up
-    // Position 2 (index 1): down
-    // Position 3 (index 2): up
-    // Position 4 (index 3): down
-    // Position 5 (index 4): up
-    // Position 6 (index 5): down
     return index % 2 === 0 ? 'align-top' : 'align-bottom';
   };
 
-  // Helper function to determine if image should be up or down for Row 2 (REVERSED)
-  // Pattern: 1 down, 2 up, 3 down, 4 up, 5 down, 6 up (opposite of Row 1)
   const getAlignmentRow2 = (index: number) => {
-    // index is 0-based: 0, 1, 2, 3, 4, 5
-    // Position 1 (index 0): down (reversed)
-    // Position 2 (index 1): up (reversed)
-    // Position 3 (index 2): down (reversed)
-    // Position 4 (index 3): up (reversed)
-    // Position 5 (index 4): down (reversed)
-    // Position 6 (index 5): up (reversed)
     return index % 2 === 0 ? 'align-bottom' : 'align-top';
   };
 
-  // Scroll-based horizontal floating effect
+  // Scroll-based horizontal floating effect with seamless looping
   useEffect(() => {
     const row1 = row1Ref.current;
     const row2 = row2Ref.current;
     if (!row1 || !row2) return;
 
-    const handleScroll = () => {
-      const scrollY = window.scrollY || window.pageYOffset;
+    // Get the gallery section's position to calculate relative scroll
+    const gallerySection = row1.closest('section');
+    if (!gallerySection) return;
 
-      // Row 1 moves left (negative direction)
-      row1.style.transform = `translateX(-${scrollY * 0.10}px)`;
+    // Get container widths for loop calculation
+    const row1Container = row1.querySelector('.grid-container') as HTMLElement;
+    const row2Container = row2.querySelector('.grid-container') as HTMLElement;
+    
+    let row1HalfWidth = 0;
+    let row2HalfWidth = 0;
 
-      // Row 2 moves right (positive direction)
-      row2.style.transform = `translateX(${scrollY * 0.10}px)`;
+    // Calculate half width for seamless looping
+    const calculateWidths = () => {
+      if (row1Container && row1Container.scrollWidth > 0) {
+        row1HalfWidth = row1Container.scrollWidth / 2;
+      }
+      if (row2Container && row2Container.scrollWidth > 0) {
+        row2HalfWidth = row2Container.scrollWidth / 2;
+      }
     };
 
+    // Calculate widths after images load
+    const initWidths = () => {
+      calculateWidths();
+      setTimeout(calculateWidths, 100);
+      setTimeout(calculateWidths, 500);
+    };
+    initWidths();
+    window.addEventListener('resize', calculateWidths);
+    
+    // Recalculate when images load
+    const allImages = document.querySelectorAll('.row-1 img, .row-2 img') as NodeListOf<HTMLImageElement>;
+    allImages.forEach(img => {
+      if (!img.complete) {
+        img.addEventListener('load', calculateWidths, { once: true });
+      }
+    });
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY || window.pageYOffset;
+      const galleryRect = gallerySection.getBoundingClientRect();
+      const galleryTop = galleryRect.top + scrollY;
+      
+      const relativeScroll = Math.max(0, scrollY - galleryTop);
+
+      // Row 1: moves left, loops seamlessly
+      if (row1HalfWidth > 0) {
+        row1.style.transform = `translateX(-${(relativeScroll * 0.10) % row1HalfWidth}px)`;
+      } else {
+        row1.style.transform = `translateX(-${relativeScroll * 0.10}px)`;
+      }
+
+      // Row 2: moves right, loops seamlessly from left side
+      // Goal: when the rightmost images reach the edge, the next images on the LEFT are already visible (no empty gap)
+      if (row2HalfWidth > 0) {
+        const scrollPos = relativeScroll * 0.10;
+        // Move to the right, but start from -row2HalfWidth so the duplicated images on the left are visible
+        // Example: scrollPos grows, offset wraps from 0..row2HalfWidth, and we subtract halfWidth so:
+        // - At scrollPos = 0      -> translateX = -row2HalfWidth (second copy visible on left)
+        // - As we scroll          -> translateX increases toward 0 (first copy comes into view from the right)
+        // - When scrollPos wraps  -> translateX jumps back to -row2HalfWidth, creating a perfect loop
+        const offset = scrollPos % row2HalfWidth;
+        const row2Translate = offset - row2HalfWidth;
+        row2.style.transform = `translateX(${row2Translate}px)`;
+      } else {
+        row2.style.transform = `translateX(${relativeScroll * 0.10}px)`;
+      }
+    };
+    
+    // Initialize rows at 0
+    row1.style.transform = 'translateX(0)';
+    row2.style.transform = 'translateX(0)';
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    // Initial call to set position on load
     handleScroll();
+    
+    // Recalculate width after layout
+    requestAnimationFrame(() => {
+      calculateWidths();
+      handleScroll();
+    });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', calculateWidths);
     };
-  }, []);
+  }, [row1Images, row2Images]);
 
   return (
-    <section className="pt-16 md:pt-20 bg-background">
-      <div className="container mx-auto px-4 text-center mb-10">
-        <Badge className="mb-3 px-4 py-2 text-sm font-semibold bg-blue-50 text-blue-600 border border-blue-100">
-          Gallery
-        </Badge>
-        <h2 className="text-3xl sm:text-4xl font-bold mb-3">
-          Workshop Moments & Real Repairs
-        </h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base">
-          Real snapshots from our garage floor — hover to pause, tap to admire, and watch how
-          every scooter gets the spotlight it deserves.
-        </p>
+    <section id="gallery" className="pt-16 md:pt-16 bg-background">
+      <div className="container mx-auto px-4">
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+            Workshop Moments & Real Repairs
+          </h2>
+          {/* Orange accent line */}
+          <div className="flex justify-center mb-4">
+            <div className="w-16 h-1 bg-orange-500 rounded-full"></div>
+          </div>
+          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
+            Real bikes. Real fixes. Real passion.
+          </p>
+        </div>
       </div>
 
       {/* Mechanic & Engine Images Gallery - Scroll-Based Floating with Staggered Pattern */}
-      <section className="w-full overflow-hidden pt-2 pb-4 sm:pt-4 sm:pb-8 md:pt-6 md:pb-12 lg:pb-20">
+      <section className="w-full overflow-x-hidden overflow-y-visible pt-2 pb-4 sm:pt-4 sm:pb-8 md:pt-6 md:pb-12 lg:pb-16" style={{ paddingLeft: 0, paddingRight: 0, marginLeft: 0, marginRight: 0 }}>
         {/* Row 1 - Moves Left on Scroll */}
-        <div ref={row1Ref} className="row row-1 mb-4 sm:mb-6 md:mb-8 lg:mb-10">
+        <div ref={row1Ref} className="row row-1 mb-4 sm:mb-6 md:mb-8 lg:mb-16">
           <div className="grid-container">
             {row1Images.map((image, index) => {
               const alignClass = getAlignmentRow1(index);
-              // Images 1, 3, 5 (indices 0, 2, 4) are up - set height to responsive 600px
-              // Images 2, 4, 6 (indices 1, 3, 5) are down - keep responsive height
               const isUpImage = index % 2 === 0;
+              // Row 1: Upward images (0,2,4,6) = 180×260, Normal images (1,3,5,7) = 180×180
+              // Heights & widths:
+              // - Mobile (all widths < md): 180×260 (up) and 180×180 (normal)
+              // - Desktop (xl and above): 400×550 (up) and 400×400 (normal)
+              // - Tablet / mid sizes: smooth step between these values
               const imageHeightClass = isUpImage 
-                ? "h-[400px] sm:h-[500px] md:h-[550px] lg:h-[600px]" 
-                : "h-[150px] sm:h-[200px] md:h-[280px] lg:h-[350px] xl:h-[448px]";
-              const imageWidthClass = isUpImage
-                ? "w-[150px] sm:w-[200px] md:w-[280px] lg:w-[350px] xl:w-[448px]"
-                : "w-[150px] sm:w-[200px] md:w-[280px] lg:w-[350px] xl:w-[448px]";
+                ? "h-[260px] md:h-[360px] lg:h-[460px] xl:h-[550px]"  // up images
+                : "h-[180px] md:h-[260px] lg:h-[330px] xl:h-[400px]"; // normal images
+              const imageWidthClass = "w-[180px] md:w-[260px] lg:w-[330px] xl:w-[400px]";
               
               return (
                 <div key={`row1-img-${index}`} className={`grid-column ${alignClass}`}>
@@ -147,15 +200,16 @@ export const Gallery = () => {
           <div className="grid-container">
             {row2Images.map((image, index) => {
               const alignClass = getAlignmentRow2(index);
-              // Images 2, 4, 6 (indices 1, 3, 5) are up - set height to responsive 600px
-              // Images 1, 3, 5 (indices 0, 2, 4) are down - keep responsive height
-              const isUpImage = index % 2 === 1;
-              const imageHeightClass = isUpImage 
-                ? "h-[400px] sm:h-[500px] md:h-[550px] lg:h-[600px]" 
-                : "h-[150px] sm:h-[200px] md:h-[280px] lg:h-[350px] xl:h-[448px]";
-              const imageWidthClass = isUpImage
-                ? "w-[150px] sm:w-[200px] md:w-[280px] lg:w-[350px] xl:w-[448px]"
-                : "w-[150px] sm:w-[200px] md:w-[280px] lg:w-[350px] xl:w-[448px]";
+              // Row 2: Normal images (0,2,4,6) = 180×180, Downward images (1,3,5,7) = 180×260
+              const isNormalImage = index % 2 === 0;
+              // Heights & widths:
+              // - Mobile (all widths < md): 180×180 (normal) and 180×260 (down)
+              // - Desktop (xl and above): 400×400 (normal) and 400×550 (down)
+              // - Tablet / mid sizes: smooth step between these values
+              const imageHeightClass = isNormalImage 
+                ? "h-[180px] md:h-[260px] lg:h-[330px] xl:h-[400px]"  // normal images
+                : "h-[260px] md:h-[360px] lg:h-[460px] xl:h-[550px]"; // down images
+              const imageWidthClass = "w-[180px] md:w-[260px] lg:w-[330px] xl:w-[400px]";
               
               return (
                 <div key={`row2-img-${index}`} className={`grid-column ${alignClass}`}>

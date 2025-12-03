@@ -23,16 +23,25 @@ export const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
-          <NavLink to="/" className="text-sm font-medium transition-colors hover:text-primary" activeClassName="text-primary">
+          <a href="#home" className="text-sm font-medium transition-colors hover:text-primary text-foreground">
             Home
-          </NavLink>
-          <NavLink to="/services" className="text-sm font-medium transition-colors hover:text-primary" activeClassName="text-primary">
-            Services
-          </NavLink>
-          <a href="#why-choose-us" className="text-sm font-medium transition-colors hover:text-primary">
-            Why Us
           </a>
-          <a href="#contact" className="text-sm font-medium transition-colors hover:text-primary">
+          <a href="#why-choose-us" className="text-sm font-medium transition-colors hover:text-primary text-foreground">
+            About
+          </a>
+          <a href="#services" className="text-sm font-medium transition-colors hover:text-primary text-foreground">
+            Services
+          </a>
+          <a href="#gallery" className="text-sm font-medium transition-colors hover:text-primary text-foreground">
+            Gallery
+          </a>
+          <a href="#testimonials" className="text-sm font-medium transition-colors hover:text-primary text-foreground">
+            Testimonials
+          </a>
+          <a href="#faq" className="text-sm font-medium transition-colors hover:text-primary text-foreground">
+            FAQ
+          </a>
+          <a href="#contact" className="text-sm font-medium transition-colors hover:text-primary text-foreground">
             Contact
           </a>
         </div>
@@ -50,16 +59,25 @@ export const Navbar = () => {
         {isOpen && (
           <div className="absolute top-16 left-0 right-0 bg-background border-b md:hidden">
             <div className="container flex flex-col gap-4 p-4">
-              <NavLink to="/" className="text-sm font-medium" onClick={() => setIsOpen(false)}>
+              <a href="#home" className="text-sm font-medium text-foreground" onClick={() => setIsOpen(false)}>
                 Home
-              </NavLink>
-              <NavLink to="/services" className="text-sm font-medium" onClick={() => setIsOpen(false)}>
-                Services
-              </NavLink>
-              <a href="#why-choose-us" className="text-sm font-medium" onClick={() => setIsOpen(false)}>
-                Why Us
               </a>
-              <a href="#contact" className="text-sm font-medium" onClick={() => setIsOpen(false)}>
+              <a href="#why-choose-us" className="text-sm font-medium text-foreground" onClick={() => setIsOpen(false)}>
+                About
+              </a>
+              <a href="#services" className="text-sm font-medium text-foreground" onClick={() => setIsOpen(false)}>
+                Services
+              </a>
+              <a href="#gallery" className="text-sm font-medium text-foreground" onClick={() => setIsOpen(false)}>
+                Gallery
+              </a>
+              <a href="#testimonials" className="text-sm font-medium text-foreground" onClick={() => setIsOpen(false)}>
+                Testimonials
+              </a>
+              <a href="#faq" className="text-sm font-medium text-foreground" onClick={() => setIsOpen(false)}>
+                FAQ
+              </a>
+              <a href="#contact" className="text-sm font-medium text-foreground" onClick={() => setIsOpen(false)}>
                 Contact
               </a>
             </div>

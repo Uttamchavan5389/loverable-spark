@@ -68,7 +68,7 @@ export const HowWeWork = () => {
   }, [isPaused]);
 
   return (
-    <section id="how-we-work" className="py-20 bg-gradient-to-b from-[#f3f8ff] via-[#f7faff] to-[#f3f8ff]">
+    <section id="how-we-work" className="py-16 bg-gradient-to-b from-[#f3f8ff] via-[#f7faff] to-[#f3f8ff]">
       <div className="container mx-auto px-4">
         <div className="mb-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-2">How We Work</h2>

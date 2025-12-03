@@ -5,7 +5,8 @@ import { ServicesPreview } from "@/components/ServicesPreview";
 import { HowWeWork } from "@/components/HowWeWork";
 import { Gallery } from "@/components/Gallery";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
-import { Franchise } from "@/components/Franchise";
+import { Testimonials } from "@/components/Testimonials";
+import { FAQ } from "@/components/FAQ";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
@@ -23,7 +24,8 @@ const Index = () => {
         <HowWeWork />
         <Gallery />
         <WhyChooseUs />
-        <Franchise />
+        <Testimonials />
+        <FAQ />
         <ContactForm />
       </main>
 

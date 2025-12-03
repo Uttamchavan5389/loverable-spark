@@ -8,6 +8,7 @@ const services = [
     icon: Wrench,
     title: "Bike General Service",
     price: "Starting from ₹999",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800",
     features: [
       "Engine Oil Change",
       "Chain Tension Check",
@@ -26,6 +27,7 @@ const services = [
     icon: Zap,
     title: "Bike Electrical Repairs",
     price: "Starting from ₹499",
+    image: "https://images.unsplash.com/photo-1558980664-1db506751c42?auto=format&fit=crop&q=80&w=800",
     features: [
       "Wiring inspection & repair",
       "Starter motor servicing",
@@ -39,6 +41,7 @@ const services = [
     icon: PaintBucket,
     title: "Bike Body Work",
     price: "Starting from ₹1499",
+    image: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&q=80&w=800",
     features: [
       "Dent removal",
       "Scratch repair",
@@ -52,6 +55,7 @@ const services = [
     icon: Settings,
     title: "Bike Engine Services",
     price: "Starting from ₹9999",
+    image: "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=800",
     features: [
       "Engine overhaul",
       "Carburetor cleaning",
@@ -91,7 +95,8 @@ export const ServicesPreview = () => {
           </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
+        {/* 1 card per row on all mobile widths; start 2 columns only from md (≥768px) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
           {services.map((service, index) => (
             <ServiceCard key={index} {...service} />
           ))}
