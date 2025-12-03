@@ -5,6 +5,7 @@ import { Wrench, Zap, Settings, Droplet, Gauge, Shield, Battery, Sparkles, Alert
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ServiceCard } from "@/components/ServiceCard";
 
 const services = [
   {

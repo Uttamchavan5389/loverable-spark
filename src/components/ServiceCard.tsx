@@ -6,9 +6,10 @@ interface ServiceCardProps {
   title: string;
   price: string;
   features: string[];
+  description?: string;
 }
 
-export const ServiceCard = ({ icon: Icon, title, price, features }: ServiceCardProps) => {
+export const ServiceCard = ({ icon: Icon, title, price, features, description }: ServiceCardProps) => {
   return (
     <div className="group relative overflow-hidden rounded-xl bg-white shadow-md transition-all hover:-translate-y-2 hover:shadow-xl border-t-4 border-green-border">
       <div className="p-6">
@@ -23,6 +24,9 @@ export const ServiceCard = ({ icon: Icon, title, price, features }: ServiceCardP
           <span className="inline-block rounded-full bg-red-500 px-4 py-1 text-sm font-bold text-white">
             {price}
           </span>
+          {description && (
+            <p className="mt-2 text-sm text-muted-foreground">{description}</p>
+          )}
         </div>
 
         {/* Features List */}
