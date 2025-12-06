@@ -27,8 +27,8 @@ export const ContactForm = () => {
   };
 
   return (
-    <section id="contact" className="py-16 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-16 bg-background overflow-x-hidden">
+      <div className="container mx-auto px-4 max-w-full w-full">
         {/* Header Section */}
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
@@ -44,11 +44,11 @@ export const ContactForm = () => {
         </div>
 
         {/* Additional Info - Before You Visit */}
-        <div className="bg-muted/30 rounded-lg p-8 mb-12 max-w-6xl mx-auto">
+        <div className="bg-muted/30 rounded-lg p-6 md:p-8 mb-12 max-w-[1160px] mx-auto w-full overflow-hidden">
           <h2 className="text-2xl font-bold text-center text-foreground mb-6">
             Before You Visit
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             <div className="text-center">
               <div className="text-4xl mb-3">📍</div>
               <h4 className="font-semibold text-foreground mb-2">Easy to Find</h4>
@@ -73,20 +73,20 @@ export const ContactForm = () => {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto w-full">
           {/* Contact Info */}
-          <div className="space-y-6">
-            <Card>
+          <div className="space-y-6 w-full min-w-0">
+            <Card className="w-full max-w-full">
               <CardHeader>
                 <CardTitle>Contact Information</CardTitle>
                 <CardDescription>Get in touch with us</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3 min-w-0">
                   <Phone className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     <p className="font-medium">Phone & WhatsApp</p>
-                    <a href="tel:+919533819551" className="text-sm text-muted-foreground hover:text-primary block">
+                    <a href="tel:+919533819551" className="text-sm text-muted-foreground hover:text-primary block break-words">
                       +91 95338 19551
                     </a>
                     <a 
@@ -100,11 +100,11 @@ export const ContactForm = () => {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3 min-w-0">
                   <Phone className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="font-medium">Alternative Number</p>
-                    <a href="tel:+917097797743" className="text-sm text-muted-foreground hover:text-primary block">
+                    <a href="tel:+917097797743" className="text-sm text-muted-foreground hover:text-primary block break-words">
                       +91 70977 97743
                     </a>
                     <a 
@@ -118,9 +118,9 @@ export const ContactForm = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3 min-w-0">
                   <Mail className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="font-medium">Email</p>
                     <a href="mailto:sreerambikemechanic@gmail.com" className="text-sm text-muted-foreground hover:text-primary break-all block">
                       sreerambikemechanic@gmail.com
@@ -131,21 +131,21 @@ export const ContactForm = () => {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3 min-w-0">
                   <MapPin className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="font-medium">Location</p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-muted-foreground break-words">
                       Sattanna Galli, Opp. Hara Darwaza, Karwan, Hyderabad Telangana – 500006
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3 min-w-0">
                   <Clock className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="font-medium">Working Hours</p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-muted-foreground break-words">
                       Mon - Sun : 10 AM - 9 PM
                     </p>
                   </div>
@@ -155,30 +155,32 @@ export const ContactForm = () => {
           </div>
 
           {/* Find Us - Google Maps */}
-          <div className="lg:col-span-2">
-            <Card>
+          <div className="lg:col-span-2 w-full min-w-0">
+            <Card className="w-full max-w-full overflow-hidden">
               <CardHeader>
                 <CardTitle>Find Us</CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="p-0 w-full max-w-full overflow-hidden">
                 {/* Google Maps Embed */}
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d270.85662803594573!2d78.45332119592179!3d17.372636262760548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3bcb979b8e8fd399%3A0x55835c13d0000000!2sNear%20Baradi%20Bhavan%2C%2013-5-644%2F1%2C%20Sattanna%20Galli%2C%20opp.%20hara%20Darwaze%2C%20Puranapool%2C%20Asifnagar%2C%20Telangana%20500006!3m2!1d17.3726809!2d78.4534572!5e1!3m2!1sen!2sin!4v1764784121176!5m2!1sen!2sin"
-                  width="100%"
-                  height="450"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Location Map"
-                  className="rounded-lg"
-                />
+                <div className="w-full max-w-full overflow-hidden rounded-lg">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d1132.0710425299987!2d78.45380465825812!3d17.372492112528807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3bcb979b8e8fd399%3A0x55835c13d0000000!2sNear%20Baradi%20Bhavan%2C%2013-5-644%2F1%2C%20Sattanna%20Galli%2C%20opp.%20hara%20Darwaze%2C%20Puranapool%2C%20Asifnagar%2C%20Telangana%20500006!3m2!1d17.3726809!2d78.4534572!5e0!3m2!1sen!2sin!4v1764837657964!5m2!1sen!2sin"
+                    width="100%"
+                    height="450"
+                    style={{ border: 0, maxWidth: '100%', display: 'block' }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Location Map"
+                    className="rounded-lg w-full max-w-full"
+                  />
+                </div>
                 {/* Get Directions Button */}
                 <div className="p-6 pt-4">
                   <Button
                     asChild
                     size="lg"
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                    className="w-full hero-gradient text-white"
                   >
                     <a
                       href="https://www.google.com/maps/dir/?api=1&destination=Near+Baradi+Bhavan,+13-5-644%2F1,+Sattanna+Galli,+opp.+hara+Darwaze,+Puranapool,+Asifnagar,+Telangana+500006"
@@ -196,7 +198,8 @@ export const ContactForm = () => {
         </div>
 
         {/* Quick Contact Section */}
-        <div className="bg-muted/30 rounded-lg p-16 mb-12 max-w-6xl mx-auto mt-12">
+        {/* Mobile/tablet: extra top & bottom padding, 24px side padding; desktop: keep original padding */}
+        <div className="bg-muted/30 rounded-lg pt-10 pb-12 px-6 md:p-16 mb-[30px] md:mb-12 max-w-6xl mx-auto mt-12 w-full max-w-full overflow-hidden">
           <h2 className="text-2xl font-bold text-center text-foreground mb-6">
             Quick Contact
           </h2>
@@ -215,13 +218,14 @@ export const ContactForm = () => {
             {/* Need Pickup Service */}
             <div>
               <h3 className="font-semibold text-foreground mb-2">Need Pickup Service?</h3>
-              <p className="text-sm text-muted-foreground mb-4">
+              {/* Extra spacing between paragraph and buttons */}
+              <p className="text-sm text-muted-foreground mb-14">
                 We provide pickup and drop within 3 km, and a small extra charge applies beyond that. Just call or WhatsApp us to schedule your preferred time
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   asChild
-                  className="bg-blue-600 hover:bg-blue-700 text-white"
+                  className="hero-gradient text-white"
                 >
                   <a href="tel:+919533819551">
                     <Phone className="mr-2 h-4 w-4" />

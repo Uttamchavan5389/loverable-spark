@@ -212,21 +212,21 @@ export const Testimonials = () => {
           {/* Mobile layout (< md): logo + stars + 4.9 on first line, text + Reviews link on second line */}
           <div className="flex flex-col items-center gap-2 md:hidden">
             {/* First line: Google Logo + Stars + 4.9 */}
-            <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3">
               <img
                 src="https://iconape.com/wp-content/files/ur/370111/svg/google-logo-icon-png-svg.png"
                 alt="Google logo"
                 className="h-[26px] w-[70px] object-contain"
               />
               <div className="flex items-center gap-2 text-sm">
-                <div className="flex items-center gap-1">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
-                  ))}
-                </div>
-                <span className="font-semibold text-foreground">4.9</span>
-              </div>
+            <div className="flex items-center gap-1">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
+              ))}
             </div>
+                <span className="font-semibold text-foreground">4.9</span>
+          </div>
+        </div>
             {/* Second line: Excellent Based on Google Reviews (with Reviews as bold link) */}
             <div className="text-xs text-gray-600 text-center">
               Excellent Based on Google{" "}
@@ -238,8 +238,8 @@ export const Testimonials = () => {
               >
                 Reviews
               </a>
-            </div>
-          </div>
+                </div>
+              </div>
 
           {/* Desktop / tablet layout (≥ md) - row with link */}
           <div className="hidden md:flex md:flex-row md:items-center md:justify-between gap-4">
@@ -252,14 +252,14 @@ export const Testimonials = () => {
               />
               <div className="flex items-center gap-2 text-sm sm:text-base">
                 <div className="flex items-center gap-1">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
-                  ))}
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
+                ))}
                 </div>
                 <span className="font-semibold text-foreground">4.9</span>
                 <span className="text-muted-foreground">(Excellent)</span>
               </div>
-            </div>
+              </div>
 
             {/* Right: reviews link to Google */}
             <div className="text-xs sm:text-sm text-gray-500">

@@ -7,6 +7,21 @@ All colors MUST be HSL.
 */
 
 @layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
   :root {
     --background: 0 0% 100%;
     --foreground: 218 29% 18%;
@@ -41,8 +56,9 @@ All colors MUST be HSL.
     --green-border: 160 84% 39%;
     --price-badge: 0 84% 60%;
     --radius: 0.75rem;
-    --gradient-start: 211 100% 50%;
-    --gradient-end: 195 100% 50%;
+    /* Primary CTA gradient based on #2563eb */
+    --gradient-start: 217 91% 60%;
+    --gradient-end: 217 91% 70%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -131,6 +147,19 @@ All colors MUST be HSL.
   
   .animate-float {
     animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float-mechanic {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(5deg);
+    }
+  }
+
+  .animate-float-mechanic {
+    animation: float-mechanic 3s ease-in-out infinite;
   }
   
   .animate-slide {

@@ -1,4 +1,4 @@
-import { Award, Users, MapPin, Clock } from "lucide-react";
+import { Award, Users, Shield, Clock } from "lucide-react";
 
 const reasons = [
   {
@@ -12,9 +12,9 @@ const reasons = [
     description: "Highly skilled and certified technicians for all bike brands",
   },
   {
-    icon: MapPin,
-    title: "Free Pickup & Delivery",
-    description: "Convenient doorstep service across all areas of Hyderabad",
+    icon: Shield,
+    title: "Genuine Spare Parts",
+    description: "Only genuine, high-quality parts for lasting performance and reliability.",
   },
   {
     icon: Clock,

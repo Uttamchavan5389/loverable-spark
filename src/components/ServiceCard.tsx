@@ -35,7 +35,7 @@ export const ServiceCard = ({ icon: Icon, title, price, features, image }: Servi
           <div className="space-y-2">
             <span className="block rounded-full border border-[#ef4444] bg-[#ef4444] px-3 py-1 text-[10px] font-semibold text-white uppercase tracking-wide">
               PRICE VARIES - FINAL QUOTE AFTER INSPECTION
-            </span>
+          </span>
           </div>
         </div>
 

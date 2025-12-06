@@ -24,7 +24,7 @@ const faqData = [
   {
     question: "Do you offer pickup & drop service?",
     answer:
-      "Yes, we provide pickup and drop within 5 km, and a small extra charge applies beyond that. Just call or WhatsApp us to schedule your preferred time",
+      "Yes, we provide pickup and drop within 3 km, and a small extra charge applies beyond that. Just call or WhatsApp us to schedule your preferred time",
   },
   {
     question: "How long does a typical service take?",
@@ -50,7 +50,7 @@ const faqData = [
 
 export const FAQ = () => {
   return (
-    <section id="faq" className="py-16 bg-background">
+    <section id="faq" className="py-16 bg-[#f1f5f94c]">
       <div className="container mx-auto px-4">
         {/* Header Section */}
         <div className="text-center mb-12">
