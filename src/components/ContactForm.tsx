@@ -123,7 +123,7 @@ export const ContactForm = () => {
                   <div className="min-w-0 flex-1">
                     <p className="font-medium">Email</p>
                     <a href="mailto:sreerambikemechanic@gmail.com" className="text-sm text-muted-foreground hover:text-primary break-all block">
-                      sreerambikemechanic@gmail.com
+                    info@hyderabadbikemechanic.com
                     </a>
                     <p className="text-xs text-muted-foreground mt-1">
                       We typically respond within 24 hours
@@ -146,7 +146,8 @@ export const ContactForm = () => {
                   <div className="min-w-0 flex-1">
                     <p className="font-medium">Working Hours</p>
                     <p className="text-sm text-muted-foreground break-words">
-                      Mon - Sun : 10 AM - 9 PM
+                      Mon - Sat : 10:00 AM - 9:00 PM <br />
+                      | Sunday Optional
                     </p>
                   </div>
                 </div>

@@ -15,20 +15,85 @@ export const getAssetsFromFolder = (
   folderPath: string,
   extensions: string[] = ['jpg', 'jpeg', 'png', 'webp']
 ): string[] => {
-  // Build the glob pattern
+  // Vite's import.meta.glob requires string literals, not template strings
+  // We need to use a switch statement to return the correct literal pattern
   const extPattern = extensions.join(',');
-  const globPattern = `@/assets/${folderPath}/**/*.{${extPattern}}`;
   
-  // Dynamically import all images from the folder
-  const modules = import.meta.glob<{ default: string }>(
-    globPattern,
-    { eager: true }
-  );
+  let subfolderModules: Record<string, { default: string }> = {};
+  let rootModules: Record<string, { default: string }> = {};
+  
+  // Use switch to get literal string patterns for each folder
+  switch (folderPath) {
+    case 'about':
+      subfolderModules = import.meta.glob<{ default: string }>(
+        '@/assets/about/**/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      rootModules = import.meta.glob<{ default: string }>(
+        '@/assets/about/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      break;
+    case 'hero':
+      subfolderModules = import.meta.glob<{ default: string }>(
+        '@/assets/hero/**/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      rootModules = import.meta.glob<{ default: string }>(
+        '@/assets/hero/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      break;
+    case 'gallery':
+      subfolderModules = import.meta.glob<{ default: string }>(
+        '@/assets/gallery/**/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      rootModules = import.meta.glob<{ default: string }>(
+        '@/assets/gallery/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      break;
+    case 'services':
+      subfolderModules = import.meta.glob<{ default: string }>(
+        '@/assets/services/**/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      rootModules = import.meta.glob<{ default: string }>(
+        '@/assets/services/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      break;
+    case 'brands':
+      subfolderModules = import.meta.glob<{ default: string }>(
+        '@/assets/brands/**/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      rootModules = import.meta.glob<{ default: string }>(
+        '@/assets/brands/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      break;
+    case 'scooters':
+      subfolderModules = import.meta.glob<{ default: string }>(
+        '@/assets/scooters/**/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      rootModules = import.meta.glob<{ default: string }>(
+        '@/assets/scooters/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      break;
+    default:
+      console.warn(`Folder "${folderPath}" not supported. Add it to the switch statement.`);
+      return [];
+  }
+  
+  // Combine both
+  const allModules = { ...subfolderModules, ...rootModules };
   
   // Extract image URLs
-  const images = Object.values(modules).map((mod) => mod.default);
-  
-  return images;
+  return Object.values(allModules).map((mod) => mod.default);
 };
 
 /**
@@ -41,15 +106,88 @@ export const getAssetsFromFolderWithMetadata = (
   folderPath: string,
   extensions: string[] = ['jpg', 'jpeg', 'png', 'webp']
 ): Array<{ image: string; filename: string; path: string }> => {
-  const extPattern = extensions.join(',');
-  const globPattern = `@/assets/${folderPath}/**/*.{${extPattern}}`;
+  // Vite's import.meta.glob requires string literals, not template strings
+  // Use switch statement to return the correct literal pattern
+  let subfolderModules: Record<string, { default: string }> = {};
+  let rootModules: Record<string, { default: string }> = {};
   
-  const modules = import.meta.glob<{ default: string }>(
-    globPattern,
-    { eager: true }
-  );
+  // Use switch to get literal string patterns for each folder
+  switch (folderPath) {
+    case 'about':
+      subfolderModules = import.meta.glob<{ default: string }>(
+        '@/assets/about/**/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      rootModules = import.meta.glob<{ default: string }>(
+        '@/assets/about/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      break;
+    case 'hero':
+      subfolderModules = import.meta.glob<{ default: string }>(
+        '@/assets/hero/**/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      rootModules = import.meta.glob<{ default: string }>(
+        '@/assets/hero/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      break;
+    case 'gallery':
+      subfolderModules = import.meta.glob<{ default: string }>(
+        '@/assets/gallery/**/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      rootModules = import.meta.glob<{ default: string }>(
+        '@/assets/gallery/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      break;
+    case 'services':
+      subfolderModules = import.meta.glob<{ default: string }>(
+        '@/assets/services/**/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      rootModules = import.meta.glob<{ default: string }>(
+        '@/assets/services/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      break;
+    case 'brands':
+      subfolderModules = import.meta.glob<{ default: string }>(
+        '@/assets/brands/**/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      rootModules = import.meta.glob<{ default: string }>(
+        '@/assets/brands/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      break;
+    case 'scooters':
+      subfolderModules = import.meta.glob<{ default: string }>(
+        '@/assets/scooters/**/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      rootModules = import.meta.glob<{ default: string }>(
+        '@/assets/scooters/*.{jpg,jpeg,png,webp}',
+        { eager: true }
+      );
+      break;
+    default:
+      console.warn(`Folder "${folderPath}" not supported. Add it to the switch statement.`);
+      return [];
+  }
   
-  return Object.entries(modules).map(([path, mod]) => {
+  // Combine both, avoiding duplicates by using path as key
+  const allModules = { ...subfolderModules, ...rootModules };
+  
+  // Remove duplicates based on path
+  const uniqueModules = new Map<string, { default: string }>();
+  Object.entries(allModules).forEach(([path, mod]) => {
+    uniqueModules.set(path, mod);
+  });
+  
+  return Array.from(uniqueModules.entries()).map(([path, mod]) => {
     const filename = path.split('/').pop() || '';
     return {
       image: mod.default,

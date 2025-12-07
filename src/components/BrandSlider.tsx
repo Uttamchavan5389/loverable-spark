@@ -1,28 +1,19 @@
 import { useEffect, useRef, useState, useMemo } from "react";
-
-// Automatically load all images from brands folder
-const brandModules = import.meta.glob<{ default: string }>(
-  "@/assets/brands/*.png",
-  { eager: true }
-);
-
-// Automatically load all images from scooters folder
-const scooterModules = import.meta.glob<{ default: string }>(
-  "@/assets/scooters/*.png",
-  { eager: true }
-);
+import { getAssetsFromFolderWithMetadata } from "@/utils/getAssetsFromFolder";
 
 const SCROLL_SPEED = 1.3; // pixels per frame
 
 export const BrandSlider = () => {
   // Process brands: extract filename and sort
   const brands = useMemo(() => {
-    return Object.entries(brandModules)
-      .map(([path, mod]) => {
-        const fileName = path.split("/").pop()?.replace(".png", "") || "brand";
+    const brandImages = getAssetsFromFolderWithMetadata('brands');
+    return brandImages
+      .map((item) => {
+        // Remove extension from filename
+        const fileName = item.filename.replace(/\.(png|jpg|jpeg|webp|svg)$/i, "") || "brand";
         return {
           name: fileName,
-          logo: mod.default,
+          logo: item.image,
         };
       })
       .sort((a, b) => {
@@ -38,12 +29,14 @@ export const BrandSlider = () => {
 
   // Process scooters: extract filename and sort
   const scooters = useMemo(() => {
-    return Object.entries(scooterModules)
-      .map(([path, mod]) => {
-        const fileName = path.split("/").pop()?.replace(".png", "") || "scooter";
+    const scooterImages = getAssetsFromFolderWithMetadata('scooters');
+    return scooterImages
+      .map((item) => {
+        // Remove extension from filename
+        const fileName = item.filename.replace(/\.(png|jpg|jpeg|webp|svg)$/i, "") || "scooter";
         return {
           name: fileName,
-          image: mod.default,
+          image: item.image,
         };
       })
       .sort((a, b) => {

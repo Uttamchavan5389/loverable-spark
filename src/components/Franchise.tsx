@@ -39,7 +39,7 @@ export const Franchise = () => {
               ))}
             </ul>
 
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700" asChild>
+            <Button size="lg" className="hero-gradient text-white" asChild>
               <a href="#contact">GET FRANCHISE DETAILS</a>
             </Button>
           </div>

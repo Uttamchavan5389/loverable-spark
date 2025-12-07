@@ -15,6 +15,26 @@ export const Navbar = () => {
     e.preventDefault();
     setIsOpen(false);
     
+    // Update active section immediately when clicked
+    setActiveSection(sectionId);
+    
+    // Handle home navigation - always go to root URL without hash
+    if (sectionId === "home") {
+      if (location.pathname !== "/") {
+        navigate("/");
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 100);
+      } else {
+        // Remove hash from URL if present
+        if (window.location.hash) {
+          window.history.pushState(null, "", "/");
+        }
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      return;
+    }
+    
     // Handle navigation to separate pages
     if (sectionId === "services" && location.pathname !== "/services") {
       navigate("/services");
@@ -52,17 +72,22 @@ export const Navbar = () => {
       return;
     }
     
-    // Handle anchor links on home page
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offset = 80; // Account for fixed navbar
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+    // Handle anchor links on home page - update URL hash and scroll
+    if (location.pathname === "/") {
+      // Update URL hash
+      window.history.pushState(null, "", `#${sectionId}`);
       
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const offset = 80; // Account for fixed navbar
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
     }
   };
 
@@ -105,7 +130,7 @@ export const Navbar = () => {
   }, [location.pathname]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <nav className="container mx-auto flex h-16 items-center justify-between px-4">
         <NavLink to="/" className="flex items-center gap-2 group">
           <div className="flex items-center gap-2">
@@ -122,7 +147,7 @@ export const Navbar = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
           <a 
-            href="#home" 
+            href="/" 
             onClick={(e) => handleClick(e, "home")}
             className={`text-sm font-medium transition-colors hover:text-primary ${
               activeSection === "home" ? "text-primary" : "text-foreground"
@@ -200,7 +225,7 @@ export const Navbar = () => {
           <div className="absolute top-16 left-0 right-0 bg-background border-b md:hidden">
             <div className="container flex flex-col gap-4 p-4">
               <a 
-                href="#home" 
+                href="/" 
                 onClick={(e) => handleClick(e, "home")}
                 className={`text-sm font-medium ${
                   activeSection === "home" ? "text-primary" : "text-foreground"

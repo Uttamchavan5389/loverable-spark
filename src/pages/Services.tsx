@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
-import { Wrench, Zap, Settings, Droplet, Gauge, Shield, Battery, Sparkles, AlertTriangle, FileText, PlugZap, Phone, ChevronDown } from "lucide-react";
+import { Wrench, Zap, Settings, Droplet, Gauge, Shield, Battery, Sparkles, AlertTriangle, FileText, PlugZap, Phone, ChevronDown, PaintBucket } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -158,6 +158,24 @@ const services = [
       "Wheel Deep Clean",
       "Underbody Wash",
       "Final Inspection",
+    ],
+  },
+  {
+    icon: PaintBucket,
+    title: "Bike Body Work",
+    price: "Starting from ₹1,499",
+    description: "Professional body repair, painting, and restoration services",
+    features: [
+      "Dent Removal & Repair",
+      "Scratch Repair & Touch-up",
+      "Complete Repainting",
+      "Panel Beating Work",
+      "Paint Matching & Blending",
+      "Custom Graphics & Decals",
+      "Polish & Waxing",
+      "Rust Treatment",
+      "Frame Straightening",
+      "Quality Finish Guarantee",
     ],
   },
   {

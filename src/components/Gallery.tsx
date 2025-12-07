@@ -1,45 +1,33 @@
 import { useMemo, useRef, useEffect } from "react";
-import normalPlaceholder1 from "@/assets/gallery/normal/placeholder-1.png";
-import normalPlaceholder2 from "@/assets/gallery/normal/placeholder-2.png";
-import normalPlaceholder3 from "@/assets/gallery/normal/placeholder-3.png";
-import normalPlaceholder4 from "@/assets/gallery/normal/placeholder-4.png";
-import normalPlaceholder5 from "@/assets/gallery/normal/placeholder-1.png";
-import normalPlaceholder6 from "@/assets/gallery/normal/placeholder-2.png";
-import reversePlaceholder1 from "@/assets/gallery/reverse/placeholder-5.png";
-import reversePlaceholder2 from "@/assets/gallery/reverse/placeholder-6.png";
-import reversePlaceholder3 from "@/assets/gallery/reverse/placeholder-7.png";
-import reversePlaceholder4 from "@/assets/gallery/reverse/placeholder-8.png";
-import reversePlaceholder5 from "@/assets/gallery/reverse/placeholder-5.png";
-import reversePlaceholder6 from "@/assets/gallery/reverse/placeholder-6.png";
+import { getAssetsFromFolderWithMetadata } from "@/utils/getAssetsFromFolder";
 
 export const Gallery = () => {
   const row1Ref = useRef<HTMLDivElement>(null);
   const row2Ref = useRef<HTMLDivElement>(null);
 
   const normalImages = useMemo(() => {
-    const modules = import.meta.glob<{ default: string }>(
-      "@/assets/gallery/normal/*.png",
-      { eager: true }
-    );
-    const images = Object.values(modules).map((mod) => mod.default);
-    return images.length
-      ? images
-      : [normalPlaceholder1, normalPlaceholder2, normalPlaceholder3, normalPlaceholder4, normalPlaceholder5, normalPlaceholder6];
+    // Fetch all gallery images and filter for normal subfolder
+    const allGalleryImages = getAssetsFromFolderWithMetadata('gallery');
+    const normal = allGalleryImages
+      .filter(item => item.path.includes('/gallery/normal/'))
+      .map(item => item.image);
+    // Remove duplicates and return unique images only
+    return Array.from(new Set(normal));
   }, []);
 
   const reverseImages = useMemo(() => {
-    const modules = import.meta.glob<{ default: string }>(
-      "@/assets/gallery/reverse/*.png",
-      { eager: true }
-    );
-    const images = Object.values(modules).map((mod) => mod.default);
-    return images.length
-      ? images
-      : [reversePlaceholder1, reversePlaceholder2, reversePlaceholder3, reversePlaceholder4, reversePlaceholder5, reversePlaceholder6];
+    // Fetch all gallery images and filter for reverse subfolder
+    const allGalleryImages = getAssetsFromFolderWithMetadata('gallery');
+    const reverse = allGalleryImages
+      .filter(item => item.path.includes('/gallery/reverse/'))
+      .map(item => item.image);
+    // Remove duplicates and return unique images only
+    return Array.from(new Set(reverse));
   }, []);
 
+  // Duplicate images in DOM for seamless infinite scroll (not in folder, just for rendering)
+  // This ensures last image connects seamlessly to first image
   const row1Images = useMemo(() => [...normalImages, ...normalImages], [normalImages]);
-  // Row 2: Duplicate images for seamless right-to-left looping
   const row2Images = useMemo(() => [...reverseImages, ...reverseImages], [reverseImages]);
 
   const getAlignmentRow1 = (index: number) => {
@@ -67,7 +55,7 @@ export const Gallery = () => {
     let row1HalfWidth = 0;
     let row2HalfWidth = 0;
 
-    // Calculate half width for seamless looping
+    // Calculate half width for seamless looping (since we duplicate images in DOM)
     const calculateWidths = () => {
       if (row1Container && row1Container.scrollWidth > 0) {
         row1HalfWidth = row1Container.scrollWidth / 2;
@@ -102,24 +90,23 @@ export const Gallery = () => {
       const relativeScroll = Math.max(0, scrollY - galleryTop);
 
       // Row 1: moves left, loops seamlessly
+      // When scroll reaches half width, it seamlessly continues from the duplicate set
       if (row1HalfWidth > 0) {
         row1.style.transform = `translateX(-${(relativeScroll * 0.10) % row1HalfWidth}px)`;
       } else {
         row1.style.transform = `translateX(-${relativeScroll * 0.10}px)`;
       }
 
-      // Row 2: moves right, loops seamlessly from left side
-      // Goal: when the rightmost images reach the edge, the next images on the LEFT are already visible (no empty gap)
+      // Row 2: moves right, loops seamlessly
+      // Start from negative half width so duplicate images are visible on left
+      // When scroll reaches end, it seamlessly continues from the duplicate set
       if (row2HalfWidth > 0) {
         const scrollPos = relativeScroll * 0.10;
-        // Move to the right, but start from -row2HalfWidth so the duplicated images on the left are visible
-        // Example: scrollPos grows, offset wraps from 0..row2HalfWidth, and we subtract halfWidth so:
-        // - At scrollPos = 0      -> translateX = -row2HalfWidth (second copy visible on left)
-        // - As we scroll          -> translateX increases toward 0 (first copy comes into view from the right)
-        // - When scrollPos wraps  -> translateX jumps back to -row2HalfWidth, creating a perfect loop
         const offset = scrollPos % row2HalfWidth;
-        const row2Translate = offset - row2HalfWidth;
-        row2.style.transform = `translateX(${row2Translate}px)`;
+        // Start from -halfWidth so when offset is 0, the duplicate set is visible on left
+        // As we scroll, offset increases and first set comes into view from right
+        // When offset wraps back to 0, it seamlessly continues from duplicate set
+        row2.style.transform = `translateX(${offset - row2HalfWidth}px)`;
       } else {
         row2.style.transform = `translateX(${relativeScroll * 0.10}px)`;
       }

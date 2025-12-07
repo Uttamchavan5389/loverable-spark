@@ -64,47 +64,50 @@ export const Footer = () => {
       return;
     }
     
-    // Handle home navigation - go to home page and scroll to hero section
+    // Handle home navigation - go to home page and scroll to top (no hash)
     if (sectionId === "home") {
       if (location.pathname !== "/") {
-        navigate("/#home");
+        navigate("/");
         setTimeout(() => {
-          const element = document.getElementById("home");
-          if (element) {
-            const offset = 80;
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - offset;
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: "smooth"
-            });
-          }
+          window.scrollTo({ top: 0, behavior: "smooth" });
         }, 100);
       } else {
-        // Already on home page, just scroll to hero section
-        const element = document.getElementById("home");
-        if (element) {
-          const offset = 80;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - offset;
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-          });
+        // Remove hash from URL if present
+        if (window.location.hash) {
+          window.history.pushState(null, "", "/");
         }
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
       return;
     }
     
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+    // Handle anchor links on home page - update URL hash and scroll
+    if (location.pathname === "/") {
+      // Update URL hash
+      window.history.pushState(null, "", `#${sectionId}`);
+      
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    } else {
+      // If not on home page, just scroll (shouldn't happen for these sections, but handle it)
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
     }
   };
 
@@ -148,7 +151,7 @@ export const Footer = () => {
             <h4 className="text-lg sm:text-lg md:text-xl font-bold mb-2 text-white">Quick Links</h4>
             <div className="w-16 h-0.5 bg-orange-500 mb-4"></div>
             <ul className="space-y-2 text-sm">
-              <li><a href="#home" onClick={(e) => handleFooterClick(e, "home")} className="text-white hover:text-orange-400 transition-colors md:text-gray-300 md:hover:text-white">Home</a></li>
+              <li><a href="/" onClick={(e) => handleFooterClick(e, "home")} className="text-white hover:text-orange-400 transition-colors md:text-gray-300 md:hover:text-white">Home</a></li>
               <li><a href="/about" onClick={(e) => handleFooterClick(e, "about")} className="text-white hover:text-orange-400 transition-colors md:text-gray-300 md:hover:text-white">About Us</a></li>
               <li><a href="/services" onClick={(e) => handleFooterClick(e, "services")} className="text-white hover:text-orange-400 transition-colors md:text-gray-300 md:hover:text-white">Services</a></li>
               <li><a href="#gallery" onClick={(e) => handleFooterClick(e, "gallery")} className="text-white hover:text-orange-400 transition-colors md:text-gray-300 md:hover:text-white">Gallery</a></li>

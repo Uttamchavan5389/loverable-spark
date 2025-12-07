@@ -4,11 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Phone, Wrench, Shield, Clock, Star, MessageCircle } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import heroFallback1 from "@/assets/hero/hero-mechanic.jpg";
-import heroFallback2 from "@/assets/hero/hero-slide-2.jpg";
-import heroFallback3 from "@/assets/hero/hero-slide-3.jpg";
-import heroFallback4 from "@/assets/hero/hero-slide-4.jpg";
-import heroFallback5 from "@/assets/hero/hero-slide-5.jpg";
+import { getAssetsFromFolder } from "@/utils/getAssetsFromFolder";
 
 export const HeroNew = () => {
   const plugin = useRef(
@@ -18,21 +14,11 @@ export const HeroNew = () => {
   const heroSlides = useMemo(() => {
     // Automatically fetch all images from hero folder and subfolders
     // This works at build time - all images will be included in the production build
-    const modules = import.meta.glob<{ default: string }>(
-      "@/assets/hero/**/*.{jpg,png,jpeg,webp}",
-      { eager: true }
-    );
+    const images = getAssetsFromFolder('hero');
 
-    const images = Object.values(modules).map((mod) => mod.default);
-
+    // If no images found, return empty array (component will handle gracefully)
     if (images.length === 0) {
-      return [
-        { image: heroFallback1, alt: "Professional bike mechanic at work" },
-        { image: heroFallback2, alt: "Expert motorcycle engine repair in Hyderabad" },
-        { image: heroFallback3, alt: "Multiple bikes being serviced in professional workshop" },
-        { image: heroFallback4, alt: "Satisfied customer receiving serviced Royal Enfield" },
-        { image: heroFallback5, alt: "Professional brake repair service in Hyderabad" },
-  ];
+      return [];
     }
 
     return images.map((image, index) => ({
@@ -44,31 +30,33 @@ export const HeroNew = () => {
   return (
     <section id="home" className="relative hero-section-height overflow-hidden text-white w-full max-w-full">
       {/* Carousel with multiple images - changes every 3 seconds */}
-      <div className="absolute inset-0 w-full h-full z-0 max-w-full overflow-hidden">
-        <Carousel
-          plugins={[plugin.current]}
-          className="w-full h-full max-w-full"
-          opts={{
-            loop: true,
-            align: "start",
-          }}
-        >
-          <CarouselContent className="h-full -ml-0">
-            {heroSlides.map((slide, index) => (
-              <CarouselItem key={index} className="pl-0 basis-full hero-section-height max-w-full">
-                <div className="relative w-full h-full hero-section-height max-w-full overflow-hidden">
-                  <img 
-                    src={slide.image} 
-                    alt={slide.alt}
-                    className="absolute inset-0 w-full h-full object-cover max-w-full"
-                    style={{ display: 'block', width: '100%', height: '100%', maxWidth: '100%' }}
-                  />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
-      </div>
+      {heroSlides.length > 0 && (
+        <div className="absolute inset-0 w-full h-full z-0 max-w-full overflow-hidden">
+          <Carousel
+            plugins={[plugin.current]}
+            className="w-full h-full max-w-full"
+            opts={{
+              loop: true,
+              align: "start",
+            }}
+          >
+            <CarouselContent className="h-full -ml-0">
+              {heroSlides.map((slide, index) => (
+                <CarouselItem key={index} className="pl-0 basis-full hero-section-height max-w-full">
+                  <div className="relative w-full h-full hero-section-height max-w-full overflow-hidden">
+                    <img 
+                      src={slide.image} 
+                      alt={slide.alt}
+                      className="absolute inset-0 w-full h-full object-cover max-w-full"
+                      style={{ display: 'block', width: '100%', height: '100%', maxWidth: '100%' }}
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </div>
+      )}
       {/* Dark overlay for text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60 z-[1]"></div>
       
@@ -82,7 +70,7 @@ export const HeroNew = () => {
 
           {/* Main Title */}
           <h1 className="mb-4 text-4xl md:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-2xl">
-            <span className="text-white">Trusted Bike & EV Bike Service in </span>
+            <span className="text-white">Trusted Two-Wheeler & EV Service in </span>
             <span className="text-blue-400">Hyderabad</span>
             <span className="text-white"> 🛠️</span>
           </h1>
@@ -110,7 +98,7 @@ export const HeroNew = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg" asChild>
+            <Button size="lg" className="hero-gradient text-white px-8 py-6 text-lg" asChild>
               <a href="#contact">
                 <Phone className="mr-2 h-5 w-5" />
                 Book Service
@@ -135,12 +123,12 @@ export const HeroNew = () => {
               <span className="text-white">4.9/5 on Google</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-blue-400 font-bold">1000+</span>
+              <span className="text-blue-400 font-bold">5000+</span>
               <span className="text-white">Happy Customers</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-blue-400 font-semibold">Warranty</span>
-              <span className="text-gray-300">on Repairs</span>
+              <span className="text-blue-400 font-semibold">Quality Work</span>
+              <span className="text-gray-300">No Compromise</span>
             </div>
           </div>
         </div>

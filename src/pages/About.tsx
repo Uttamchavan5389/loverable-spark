@@ -1,14 +1,46 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { Card, CardContent } from "@/components/ui/card";
 import { Award, Heart, ShieldCheck, Users, User } from "lucide-react";
+import { getAssetsFromFolderWithMetadata } from "@/utils/getAssetsFromFolder";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const About = () => {
+  const galleryPlugin = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: false })
+  );
+
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  // Automatically fetch all images from about folder
+  const aboutImages = useMemo(() => {
+    const imagesWithMetadata = getAssetsFromFolderWithMetadata('about');
+    
+    // Find specific images by filename
+    const workshopImage = imagesWithMetadata.find(img => 
+      img.filename.toLowerCase().includes('workshop')
+    );
+    const founderImage = imagesWithMetadata.find(img => 
+      img.filename.toLowerCase().includes('founder')
+    );
+    
+    // Get other images for gallery/memories (exclude workshop and founder)
+    const galleryImages = imagesWithMetadata.filter(img => 
+      !img.filename.toLowerCase().includes('workshop') && 
+      !img.filename.toLowerCase().includes('founder')
+    );
+
+    return {
+      workshop: workshopImage?.image || null,
+      founder: founderImage?.image || null,
+      gallery: galleryImages.map(img => img.image),
+    };
   }, []);
 
   const values = [
@@ -53,7 +85,7 @@ const About = () => {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">About Us</h1>
-              <p className="text-xl text-orange-500 font-semibold mb-4">
+              <p className="text-xl text-primary font-semibold mb-4">
                 From Sree Ram Bike Mechanic to HyderabadBikeMechanic
               </p>
               <p className="text-lg text-muted-foreground">
@@ -87,7 +119,7 @@ const About = () => {
                     <strong className="text-foreground">HyderabadBikeMechanic</strong>, we remain 
                     committed to the same values that made us trusted by thousands of riders.
                   </p>
-                  <div className="bg-muted/30 p-6 rounded-lg border-l-4 border-orange-500">
+                  <div className="bg-muted/30 p-6 rounded-lg border-l-4 border-primary">
                     <p className="text-foreground italic font-semibold text-xl">
                       "Do every job as if the bike were your own."
                     </p>
@@ -97,13 +129,23 @@ const About = () => {
               </div>
 
               <div className="relative">
-                <div className="rounded-lg shadow-xl w-full bg-muted/50 aspect-[4/3] flex items-center justify-center">
-                  <div className="text-center text-muted-foreground">
-                    <Users className="h-24 w-24 mx-auto mb-4 opacity-50" />
-                    <p className="text-sm">Workshop Image</p>
+                {aboutImages.workshop ? (
+                  <div className="rounded-lg shadow-xl w-full aspect-[4/3] overflow-hidden">
+                    <img 
+                      src={aboutImages.workshop} 
+                      alt="Workshop" 
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                </div>
-                <div className="absolute -bottom-6 -left-6 bg-orange-500 text-white p-6 rounded-lg shadow-xl">
+                ) : (
+                  <div className="rounded-lg shadow-xl w-full bg-muted/50 aspect-[4/3] flex items-center justify-center">
+                    <div className="text-center text-muted-foreground">
+                      <Users className="h-24 w-24 mx-auto mb-4 opacity-50" />
+                      <p className="text-sm">Workshop Image</p>
+                    </div>
+                  </div>
+                )}
+                <div className="absolute -bottom-6 -left-6 bg-primary text-white p-6 rounded-lg shadow-xl">
                   <div className="text-4xl font-bold">40+</div>
                   <div className="text-sm">Years of Experience</div>
                 </div>
@@ -122,11 +164,19 @@ const About = () => {
               <Card className="card-hover shadow-lg">
                 <CardContent className="p-8">
                   <div className="mb-6">
-                    <div className="w-32 h-32 rounded-full bg-primary/10 mx-auto mb-4 flex items-center justify-center">
-                      <User className="h-16 w-16 text-primary" />
+                    <div className="w-32 h-32 rounded-full bg-primary/10 mx-auto mb-4 flex items-center justify-center overflow-hidden">
+                      {aboutImages.founder ? (
+                        <img 
+                          src={aboutImages.founder} 
+                          alt="Mr. Ram Chavan, Founder" 
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <User className="h-16 w-16 text-primary" />
+                      )}
                     </div>
                     <h3 className="text-2xl font-bold text-foreground mb-2">Mr. Ram Chavan</h3>
-                    <p className="text-orange-500 font-semibold mb-4">Founder & Head Mechanic</p>
+                    <p className="text-primary font-semibold mb-4">Founder & Head Mechanic</p>
                   </div>
                   <p className="text-lg text-muted-foreground">
                     With over 40 years of experience in two-wheeler maintenance and repair, 
@@ -160,10 +210,10 @@ const About = () => {
                     <CardContent className="p-8">
                       <div className="flex justify-center mb-4">
                         <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                          <Icon className="h-8 w-8 text-orange-500" />
+                          <Icon className="h-8 w-8 text-primary" />
                         </div>
                       </div>
-                      <h3 className="text-xl font-semibold mb-3 text-foreground">
+                      <h3 className="text-xl font-bold mb-3 text-foreground">
                         {value.title}
                       </h3>
                       <p className="text-muted-foreground">{value.desc}</p>
@@ -176,28 +226,76 @@ const About = () => {
         </section>
 
         {/* Stats Section */}
-        <section className="py-16 bg-gradient-to-r from-foreground to-foreground/90 text-white">
-          <div className="container mx-auto px-4">
+        <section className="relative bg-gradient-to-br from-[hsl(20,100%,92%)] via-[hsl(210,30%,97%)] to-[hsl(211,100%,96%)] py-16 overflow-hidden">
+          {/* Floating animated tools */}
+          <div className="absolute top-10 right-10 md:top-20 md:right-20 text-6xl md:text-8xl opacity-40 animate-float-mechanic pointer-events-none">
+            🔧
+          </div>
+          <div className="absolute bottom-10 left-10 md:bottom-20 md:left-20 text-6xl md:text-8xl opacity-30 animate-float-mechanic pointer-events-none" style={{ animationDelay: '1s' }}>
+            ⚙️
+          </div>
+          
+          <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div>
-                <div className="text-4xl md:text-5xl font-bold text-orange-500 mb-2">40+</div>
-                <div className="text-gray-300">Years Experience</div>
+                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">40+</div>
+                <div className="text-muted-foreground">Years Experience</div>
               </div>
               <div>
-                <div className="text-4xl md:text-5xl font-bold text-orange-500 mb-2">5000+</div>
-                <div className="text-gray-300">Happy Customers</div>
+                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">5000+</div>
+                <div className="text-muted-foreground">Happy Customers</div>
               </div>
               <div>
-                <div className="text-4xl md:text-5xl font-bold text-orange-500 mb-2">15,000+</div>
-                <div className="text-gray-300">Bikes Serviced</div>
+                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">15,000+</div>
+                <div className="text-muted-foreground">Bikes Serviced</div>
               </div>
               <div>
-                <div className="text-4xl md:text-5xl font-bold text-orange-500 mb-2">100%</div>
-                <div className="text-gray-300">Customer Satisfaction</div>
+                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">100%</div>
+                <div className="text-muted-foreground">Customer Satisfaction</div>
               </div>
             </div>
           </div>
         </section>
+
+        {/* Memories/Gallery Section */}
+        {aboutImages.gallery.length > 0 && (
+          <section className="py-16 bg-background">
+            <div className="container mx-auto px-4">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+                  Our Memories
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Moments from our workshop and journey
+                </p>
+              </div>
+              <div className="max-w-4xl mx-auto">
+                <Carousel
+                  plugins={[galleryPlugin.current]}
+                  className="w-full"
+                  opts={{
+                    loop: true,
+                    align: "start",
+                  }}
+                >
+                  <CarouselContent className="-ml-2 md:-ml-4">
+                    {aboutImages.gallery.map((image, index) => (
+                      <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
+                        <div className="rounded-lg overflow-hidden shadow-lg aspect-[4/3]">
+                          <img 
+                            src={image} 
+                            alt={`Memory ${index + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                </Carousel>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Location Note */}
         <section className="py-16 bg-muted/30">
@@ -209,7 +307,7 @@ const About = () => {
               Sattanna Galli, Opp. Hara Darwaza, Karwan, Hyderabad – 500006
             </p>
             <p className="text-muted-foreground">
-              <strong>Opening Hours:</strong> Mon-Sat 8:00 AM - 8:00 PM | Sunday Closed
+              <strong>Opening Hours:</strong> Mon - Sat : 10:00 AM - 9:00 PM | Sunday Optional
             </p>
           </div>
         </section>

@@ -51,8 +51,8 @@ const services = [
   },
   {
     icon: Settings,
-    title: "Bike Engine Services",
-    price: "Starting from ₹9999",
+    title: "Engine Repairs",
+    price: "Starting from ₹1,999",
     features: [
       "Engine overhaul",
       "Carburetor cleaning",
@@ -105,9 +105,8 @@ export const ServicesPreview = () => {
         {/* View All Services Button */}
         <div className="text-center">
           <Button 
-            variant="outline" 
             size="lg" 
-            className="border-gray-300 hover:bg-primary hover:text-primary-foreground transition-colors h-12 px-8 text-base font-semibold"
+            className="hero-gradient text-white h-12 px-8 text-base font-semibold"
             onClick={handleViewAllServices}
           >
             View All Services →
