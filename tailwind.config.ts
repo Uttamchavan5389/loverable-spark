@@ -13,6 +13,15 @@ export default {
       },
     },
     extend: {
+      screens: {
+        'xs': '0px',      // Extra Small Mobile (0-319px)
+        'sm': '360px',    // Normal Mobile (360-479px) - Standard touch start ✅
+        'md': '768px',    // Small Tablet Portrait (768-833px)
+        'lg': '1024px',   // Large Tablet Landscape (1024-1199px)
+        'xl': '1200px',   // Small Laptop/Notebook (1200-1399px)
+        '2xl': '1400px',  // Standard Desktop/Full HD (1400-1919px)
+        '3xl': '1920px',  // Large Monitor/2K Display (1920px+)
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

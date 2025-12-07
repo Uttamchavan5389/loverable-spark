@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-muted py-20 md:py-32">
+    <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-muted py-16 md:py-32">
       {/* Decorative elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-10 text-6xl animate-float">🏍️</div>
@@ -41,7 +41,7 @@ export const Hero = () => {
                 <a href="tel:+919999999999">Call Now</a>
               </Button>
               <Button size="lg" className="bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp))]/90 text-white" asChild>
-                <a href="https://wa.me/918919652618?text=Hi%20I%20want%20to%20book%20a%20service" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/919533819551?text=Hi%20I%20want%20to%20book%20a%20service" target="_blank" rel="noopener noreferrer">
                   💬 WhatsApp
                 </a>
               </Button>

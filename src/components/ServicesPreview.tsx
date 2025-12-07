@@ -1,5 +1,8 @@
 import { Wrench, Zap, PaintBucket, Settings } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { ServiceCard } from "@/components/ServiceCard";
+import { getServiceImage } from "@/utils/getServiceImage";
 
 const services = [
   {
@@ -48,8 +51,8 @@ const services = [
   },
   {
     icon: Settings,
-    title: "Bike Engine Services",
-    price: "Starting from ₹9999",
+    title: "Engine Repairs",
+    price: "Starting from ₹1,999",
     features: [
       "Engine overhaul",
       "Carburetor cleaning",
@@ -62,27 +65,52 @@ const services = [
 ];
 
 export const ServicesPreview = () => {
+  const navigate = useNavigate();
+
+  const handleViewAllServices = () => {
+    // Scroll to top immediately before navigation
+    window.scrollTo({ top: 0, behavior: "instant" });
+    navigate("/services");
+  };
+
   return (
-    <section id="services" className="py-20 bg-background">
+    <section id="services" className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            🏍 Best Bike Service in Hyderabad | Expert Repairs & Maintenance
+            🏍 Best Bike Service in Hyderabad | Expert Repairs & 
+            <br /> Maintenance 
+            <div className="mx-auto mt-2 mb-3 h-1 w-16 rounded-full bg-orange-400"></div>
           </h2>
           <div className="space-y-2 text-muted-foreground max-w-3xl mx-auto">
             <p>
-              <strong>Bike Service in Hyderabad</strong> – Expert two-wheeler repairs, maintenance & doorstep assistance at affordable rates. Book <strong>online Bike Service in Hyderabad</strong> for quick, hassle-free solutions!
+              <strong>Bike Service in Hyderabad</strong> – Professional two-wheeler repairs, routine maintenance, and doorstep support at fair prices. Book your <strong>Online Bike Service in Hyderabad</strong> for quick checkups, clear estimates, and same-day work.
             </p>
             <p>
-              <strong>Bike Mechanic Near You</strong> – Hyderabad's trusted service center for all bike models. Get reliable repairs, oil changes & full servicing with the best <strong>Bike Service in Hyderabad</strong>!
+              <strong>Bike Mechanic Near You</strong> – Hyderabad's trusted workshop for all bike models. Get dependable servicing, smooth tuning, and expert care from skilled mechanics. Experience the best <strong>Bike Service in Hyderabad</strong> with honest service and real attention to your ride.
             </p>
           </div>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service, index) => (
-            <ServiceCard key={index} {...service} />
-          ))}
+        {/* 1 card per row on all mobile widths; start 2 columns only from md (≥768px) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
+          {services.map((service, index) => {
+            const serviceImage = getServiceImage(service.title);
+            return (
+              <ServiceCard key={index} {...service} image={serviceImage || undefined} />
+            );
+          })}
+        </div>
+
+        {/* View All Services Button */}
+        <div className="text-center">
+          <Button 
+            size="lg" 
+            className="hero-gradient text-white h-12 px-8 text-base font-semibold"
+            onClick={handleViewAllServices}
+          >
+            View All Services →
+          </Button>
         </div>
       </div>
     </section>

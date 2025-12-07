@@ -11,7 +11,7 @@ export const Franchise = () => {
   ];
 
   return (
-    <section id="franchise" className="py-20 bg-background">
+    <section id="franchise" className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           {/* Content */}
@@ -39,7 +39,7 @@ export const Franchise = () => {
               ))}
             </ul>
 
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700" asChild>
+            <Button size="lg" className="hero-gradient text-white" asChild>
               <a href="#contact">GET FRANCHISE DETAILS</a>
             </Button>
           </div>

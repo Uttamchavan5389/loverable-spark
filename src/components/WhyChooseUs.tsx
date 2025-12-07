@@ -1,4 +1,6 @@
-import { Award, Users, MapPin, Clock } from "lucide-react";
+import { Award, Users, Shield, Clock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const reasons = [
   {
@@ -12,9 +14,9 @@ const reasons = [
     description: "Highly skilled and certified technicians for all bike brands",
   },
   {
-    icon: MapPin,
-    title: "Free Pickup & Delivery",
-    description: "Convenient doorstep service across all areas of Hyderabad",
+    icon: Shield,
+    title: "Genuine Spare Parts",
+    description: "Only genuine, high-quality parts for lasting performance and reliability.",
   },
   {
     icon: Clock,
@@ -24,19 +26,29 @@ const reasons = [
 ];
 
 export const WhyChooseUs = () => {
+  const navigate = useNavigate();
+
+  const handleLearnMore = () => {
+    navigate("/about");
+  };
+
   return (
-    <section id="why-choose-us" className="py-20 bg-muted/30">
+    <section id="why-choose-us" className="py-16 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Why Choose Sree Ram Bike Mechanic?
           </h2>
+          {/* Orange accent line */}
+          <div className="flex justify-center mb-4">
+            <div className="w-16 h-1 bg-orange-500 rounded-full"></div>
+          </div>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Trusted by thousands of riders across Hyderabad for reliable and affordable bike service
           </p>
         </div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 mb-8">
           {reasons.map((reason, index) => {
             const Icon = reason.icon;
             return (
@@ -49,6 +61,12 @@ export const WhyChooseUs = () => {
               </div>
             );
           })}
+        </div>
+
+        <div className="text-center">
+          <Button onClick={handleLearnMore} className="hero-gradient text-white">
+            Learn More →
+          </Button>
         </div>
       </div>
     </section>
