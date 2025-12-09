@@ -64,7 +64,7 @@ export const WhyChooseUs = () => {
         </div>
 
         <div className="text-center">
-          <Button onClick={handleLearnMore} className="hero-gradient text-white">
+          <Button onClick={handleLearnMore} className="hero-gradient text-white font-medium" style={{ fontSize: '14px' }}>
             Learn More →
           </Button>
         </div>

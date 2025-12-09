@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Star } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
+import { Button } from "@/components/ui/button";
 import {
   Carousel,
   CarouselContent,
@@ -301,6 +302,17 @@ export const Testimonials = () => {
           <CarouselPrevious className="hidden md:flex" />
           <CarouselNext className="hidden md:flex" />
         </Carousel>
+
+        {/* Write Review Button - Below the carousel */}
+        <div className="text-center mt-8">
+          <Button 
+            className="hero-gradient text-white font-medium"
+            style={{ fontSize: '14px' }}
+            onClick={() => window.open("https://g.page/r/CQAAANATXINVEBM/review", "_blank", "noopener,noreferrer")}
+          >
+            Write Review →
+          </Button>
+        </div>
       </div>
     </section>
   );

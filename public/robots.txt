@@ -1,14 +1,10 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+
+# Block unnecessary system folders (if you have them)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+
+# Sitemap location
+Sitemap: https://hyderabadbikemechanic.com/sitemap.xml

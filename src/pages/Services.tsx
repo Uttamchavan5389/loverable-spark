@@ -338,7 +338,7 @@ const Services = () => {
                       <div className="w-full h-64 overflow-hidden rounded-t-lg relative max-w-full">
                         <img 
                           src={serviceImage} 
-                          alt={service.title}
+                          alt={`${service.title} service in Hyderabad Karwan`}
                           className="w-full h-full object-cover max-w-full block"
                           style={{ maxWidth: '100%' }}
                         />
@@ -502,7 +502,7 @@ const Services = () => {
                     <Phone className="h-5 w-5" />
                     Call Us
                     <ChevronDown className="h-4 w-4" />
-                  </Button>
+              </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuItem asChild>

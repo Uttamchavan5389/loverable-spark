@@ -105,8 +105,8 @@ export const ServicesPreview = () => {
         {/* View All Services Button */}
         <div className="text-center">
           <Button 
-            size="lg" 
-            className="hero-gradient text-white h-12 px-8 text-base font-semibold"
+            className="hero-gradient text-white font-medium"
+            style={{ fontSize: '14px' }}
             onClick={handleViewAllServices}
           >
             View All Services →

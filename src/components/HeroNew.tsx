@@ -21,9 +21,18 @@ export const HeroNew = () => {
       return [];
     }
 
+    // SEO-optimized alt texts for hero slides
+    const altTexts = [
+      "Professional bike mechanic servicing motorcycle in Hyderabad",
+      "Expert two-wheeler repair and maintenance in Karwan Hyderabad",
+      "Trusted bike service center with 40 years experience in Hyderabad",
+      "Bike mechanic workshop in Karwan Hyderabad",
+      "Two-wheeler service bay Hyderabad"
+    ];
+    
     return images.map((image, index) => ({
       image,
-      alt: `Hero slide ${index + 1}`,
+      alt: altTexts[index] || `Professional bike mechanic servicing motorcycle in Hyderabad`,
     }));
   }, []);
 
@@ -32,30 +41,30 @@ export const HeroNew = () => {
       {/* Carousel with multiple images - changes every 3 seconds */}
       {heroSlides.length > 0 && (
         <div className="absolute inset-0 w-full h-full z-0 max-w-full overflow-hidden">
-          <Carousel
-            plugins={[plugin.current]}
+        <Carousel
+          plugins={[plugin.current]}
             className="w-full h-full max-w-full"
-            opts={{
-              loop: true,
-              align: "start",
-            }}
-          >
-            <CarouselContent className="h-full -ml-0">
-              {heroSlides.map((slide, index) => (
+          opts={{
+            loop: true,
+            align: "start",
+          }}
+        >
+          <CarouselContent className="h-full -ml-0">
+            {heroSlides.map((slide, index) => (
                 <CarouselItem key={index} className="pl-0 basis-full hero-section-height max-w-full">
                   <div className="relative w-full h-full hero-section-height max-w-full overflow-hidden">
-                    <img 
-                      src={slide.image} 
-                      alt={slide.alt}
+                  <img 
+                    src={slide.image} 
+                    alt={slide.alt}
                       className="absolute inset-0 w-full h-full object-cover max-w-full"
                       style={{ display: 'block', width: '100%', height: '100%', maxWidth: '100%' }}
-                    />
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-        </div>
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </div>
       )}
       {/* Dark overlay for text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60 z-[1]"></div>

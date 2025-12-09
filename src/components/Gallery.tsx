@@ -172,7 +172,7 @@ export const Gallery = () => {
                   <div className={`${imageWidthClass} ${imageHeightClass} flex-shrink-0`}>
                     <img 
                       src={image} 
-                      alt={`Gallery row 1 image ${index + 1}`}
+                      alt="Bike mechanic workshop in Karwan Hyderabad"
                       className="w-full h-full object-cover rounded-lg shadow-md"
                     />
                   </div>
@@ -203,7 +203,7 @@ export const Gallery = () => {
                   <div className={`${imageWidthClass} ${imageHeightClass} flex-shrink-0`}>
                     <img 
                       src={image} 
-                      alt={`Gallery row 2 image ${index + 1}`}
+                      alt="Two-wheeler service bay Hyderabad"
                       className="w-full h-full object-cover rounded-lg shadow-md"
                     />
                   </div>
