@@ -49,7 +49,7 @@ export const Franchise = () => {
             <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
               <img
                 src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=800"
-                alt="Smart Garrage Franchise"
+                alt="Bike service franchise opportunity in Hyderabad"
                 className="w-full h-full object-cover"
               />
             </div>

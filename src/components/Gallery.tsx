@@ -432,7 +432,7 @@ export const Gallery = () => {
                   <div className={`${imageWidthClass} ${imageHeightClass} flex-shrink-0`}>
                     <img 
                       src={image} 
-                      alt="Bike mechanic workshop in Karwan Hyderabad"
+                      alt={`Bike mechanic workshop and repair service in Karwan Hyderabad ${index + 1}`}
                       className="w-full h-full object-cover rounded-lg shadow-md"
                     />
                   </div>
@@ -463,7 +463,7 @@ export const Gallery = () => {
                   <div className={`${imageWidthClass} ${imageHeightClass} flex-shrink-0`}>
                     <img 
                       src={image} 
-                      alt="Two-wheeler service bay Hyderabad"
+                      alt={`Two-wheeler service bay and bike repair in Karwan Hyderabad ${index + 1}`}
                       className="w-full h-full object-cover rounded-lg shadow-md"
                     />
                   </div>
