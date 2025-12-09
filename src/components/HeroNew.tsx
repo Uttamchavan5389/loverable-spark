@@ -40,24 +40,24 @@ export const HeroNew = () => {
     <section id="home" className="relative hero-section-height overflow-hidden text-white w-full max-w-full">
       {/* Carousel with multiple images - changes every 3 seconds */}
       {heroSlides.length > 0 && (
-        <div className="absolute inset-0 w-full h-full z-0 max-w-full overflow-hidden">
+        <div className="absolute inset-0 w-full h-full z-0 max-w-full overflow-hidden hero-section-height">
         <Carousel
           plugins={[plugin.current]}
-            className="w-full h-full max-w-full"
+            className="w-full h-full max-w-full hero-section-height"
           opts={{
             loop: true,
             align: "start",
           }}
         >
-          <CarouselContent className="h-full -ml-0">
+          <CarouselContent className="h-full -ml-0 hero-section-height">
             {heroSlides.map((slide, index) => (
                 <CarouselItem key={index} className="pl-0 basis-full hero-section-height max-w-full">
                   <div className="relative w-full h-full hero-section-height max-w-full overflow-hidden">
                   <img 
                     src={slide.image} 
                     alt={slide.alt}
-                      className="absolute inset-0 w-full h-full object-cover max-w-full"
-                      style={{ display: 'block', width: '100%', height: '100%', maxWidth: '100%' }}
+                      className="absolute inset-0 w-full h-full object-cover max-w-full min-h-full"
+                      style={{ display: 'block', width: '100%', height: '100%', minHeight: '100%', maxWidth: '100%', objectFit: 'cover' }}
                   />
                 </div>
               </CarouselItem>
@@ -66,8 +66,8 @@ export const HeroNew = () => {
         </Carousel>
       </div>
       )}
-      {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60 z-[1]"></div>
+      {/* Dark overlay for text readability - covers full height to prevent grey background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60 z-[1] min-h-full"></div>
       
       {/* Content */}
       <div className="w-full max-w-full px-4 md:container md:mx-auto md:px-4 py-20 md:py-16 relative z-10 hero-section-height flex items-center">
