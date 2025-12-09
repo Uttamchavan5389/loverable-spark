@@ -1,10 +1,14 @@
 User-agent: *
-Allow: /
 
-# Block unnecessary system folders (if you have them)
+Disallow:
+
+# Prevent crawling of server-side directories (if any)
 Disallow: /admin/
 Disallow: /private/
-Disallow: /tmp/
+Disallow: /scripts/
 
-# Sitemap location
+# Sitemap
 Sitemap: https://hyderabadbikemechanic.com/sitemap.xml
+
+# Crawl-delay (optional) — helps slow down aggressive bots (value in seconds)
+# Crawl-delay: 10

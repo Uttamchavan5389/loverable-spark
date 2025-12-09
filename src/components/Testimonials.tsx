@@ -216,7 +216,7 @@ export const Testimonials = () => {
           <div className="flex items-center gap-3">
               <img
                 src="https://iconape.com/wp-content/files/ur/370111/svg/google-logo-icon-png-svg.png"
-                alt="Google logo"
+                alt="Google Reviews rating for Hyderabad Bike Mechanic in Karwan"
                 className="h-[26px] w-[70px] object-contain"
               />
               <div className="flex items-center gap-2 text-sm">
@@ -248,7 +248,7 @@ export const Testimonials = () => {
             <div className="flex items-center gap-4">
               <img
                 src="https://iconape.com/wp-content/files/ur/370111/svg/google-logo-icon-png-svg.png"
-                alt="Google logo"
+                alt="Google Reviews rating for Hyderabad Bike Mechanic in Karwan"
                 className="h-[30px] w-[80px] object-contain"
               />
               <div className="flex items-center gap-2 text-sm sm:text-base">

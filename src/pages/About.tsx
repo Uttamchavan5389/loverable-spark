@@ -284,7 +284,7 @@ const About = () => {
                         <div className="rounded-lg overflow-hidden shadow-lg aspect-[4/3]">
                           <img 
                             src={image} 
-                            alt="Bike service memories and customer satisfaction at Hyderabad Bike Mechanic"
+                            alt={`Bike service memories and customer satisfaction at Hyderabad Bike Mechanic workshop in Karwan ${index + 1}`}
                             className="w-full h-full object-cover"
                           />
                         </div>
