@@ -89,7 +89,7 @@ export const BrandSlider = () => {
           <div>
             <h2 className="text-3xl font-bold flex items-center justify-center gap-2 mb-4">
               🛠️ Our Specialists Service Every Scooter
-            </h2>
+        </h2>
             <p className="text-muted-foreground text-sm md:text-base mb-8">
               Reliable Service You Can Feel on the Road
             </p>
@@ -99,14 +99,14 @@ export const BrandSlider = () => {
                 style={{ width: 'max-content' }}
               >
                 {allScooters.map((scooter, index) => (
-                  <div
+              <div
                     key={`${scooter.name}-${index}`}
                     className="flex-shrink-0 w-48 h-32 flex items-center justify-center rounded-2xl border border-transparent bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#3b82f6] hover:shadow-[0_12px_28px_rgba(59,130,246,0.16)]"
                     style={{ minWidth: '192px', flexShrink: 0 }}
                   >
                     <img
                       src={scooter.image}
-                      alt={`${scooter.name} - ${index}`}
+                      alt={`${scooter.name} scooter service and repair in Hyderabad`}
                       className="max-w-full max-h-full object-contain"
                       loading="eager"
                       onError={(e) => {
@@ -143,14 +143,14 @@ export const BrandSlider = () => {
                         flexShrink: 0,
                         boxSizing: 'border-box'
                       }}
-                    >
-                      <img
-                        src={brand.logo}
-                        alt={`${brand.name} logo`}
-                        className="max-w-full max-h-full object-contain"
+              >
+                <img
+                  src={brand.logo}
+                  alt={`${brand.name} bike service and repair in Hyderabad`}
+                  className="max-w-full max-h-full object-contain"
                         style={isBrand18 ? { maxWidth: '100px', maxHeight: '50px' } : {}}
                         loading="eager"
-                      />
+                />
                     </div>
                   );
                 })}

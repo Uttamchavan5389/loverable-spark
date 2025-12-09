@@ -133,7 +133,7 @@ const About = () => {
                   <div className="rounded-lg shadow-xl w-full aspect-[4/3] overflow-hidden">
                     <img 
                       src={aboutImages.workshop} 
-                      alt="Workshop" 
+                      alt="Bike mechanic workshop in Karwan Hyderabad" 
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -168,7 +168,7 @@ const About = () => {
                       {aboutImages.founder ? (
                         <img 
                           src={aboutImages.founder} 
-                          alt="Mr. Ram Chavan, Founder" 
+                          alt="Mr. Ram Chavan, Founder of Hyderabad Bike Mechanic" 
                           className="w-full h-full object-cover"
                         />
                       ) : (
@@ -284,7 +284,7 @@ const About = () => {
                         <div className="rounded-lg overflow-hidden shadow-lg aspect-[4/3]">
                           <img 
                             src={image} 
-                            alt={`Memory ${index + 1}`}
+                            alt="Bike service memories and customer satisfaction at Hyderabad Bike Mechanic"
                             className="w-full h-full object-cover"
                           />
                         </div>

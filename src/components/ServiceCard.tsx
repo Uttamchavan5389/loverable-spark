@@ -18,7 +18,7 @@ export const ServiceCard = ({ icon: Icon, title, price, features, image }: Servi
         <div className="h-48 overflow-hidden rounded-t-2xl">
           <img 
             src={image} 
-            alt={title}
+            alt={`${title} service in Hyderabad Karwan`}
             className="w-full h-full object-cover rounded-t-2xl group-hover:scale-110 transition-transform duration-500"
           />
         </div>
