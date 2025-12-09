@@ -93,7 +93,7 @@ export const ContactForm = () => {
                       href="https://wa.me/919533819551?text=Hi!%20I%20want%20to%20know%20more%20about%20your%20bike%20service." 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-xs text-[#25D366] hover:underline block mt-1"
+                      className="text-xs text-primary hover:underline block mt-1"
                     >
                       Chat on WhatsApp
                     </a>
@@ -111,7 +111,7 @@ export const ContactForm = () => {
                       href="https://wa.me/917097797743?text=Hi!%20I%20want%20to%20know%20more%20about%20your%20bike%20service." 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-xs text-[#25D366] hover:underline block mt-1"
+                      className="text-xs text-primary hover:underline block mt-1"
                     >
                       Chat on WhatsApp
                     </a>

@@ -388,31 +388,31 @@ All colors MUST be HSL.
 
   @media (min-width: 360px) {
     .hero-section-height {
-      min-height: 1000px; /* 3. Normal Mobile (360-479px) - iPhone X-15, Galaxy S10-S23 ✅ Standard touch start */
+      min-height: 1100px; /* 3. Normal Mobile (360-479px) - iPhone X-15, Galaxy S10-S23 ✅ Increased height */
     }
   }
 
   @media (min-width: 480px) {
     .hero-section-height {
-      min-height: 900px; /* 4. Large Mobile/Phablet (480-575px) - iPhone 15 Pro Max, Galaxy Note */
+      min-height: 1000px; /* 4. Large Mobile/Phablet (480-575px) - iPhone 15 Pro Max, Galaxy Note - Increased height */
     }
   }
 
   @media (min-width: 576px) {
     .hero-section-height {
-      min-height: 850px; /* 5. Mobile Landscape (576-767px) - iPhones/Android in landscape */
+      min-height: 950px; /* 5. Mobile Landscape (576-767px) - iPhones/Android in landscape - Increased height */
     }
   }
 
   @media (min-width: 768px) {
     .hero-section-height {
-      min-height: 800px; /* 6. Small Tablet Portrait (768-833px) - iPad Mini, Galaxy Tab A */
+      min-height: 900px; /* 6. Small Tablet Portrait (768-833px) - iPad Mini, Galaxy Tab A - Increased height */
     }
   }
 
   @media (min-width: 834px) {
     .hero-section-height {
-      min-height: 750px; /* 7. Tablet Portrait/Landscape (834-1023px) - iPad Air, iPad 10th Gen */
+      min-height: 850px; /* 7. Tablet Portrait/Landscape (834-1023px) - iPad Air, iPad 10th Gen - Increased height */
     }
   }
 
